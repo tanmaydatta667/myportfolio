@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, CSSProperties, FC, ReactNode, KeyboardEvent } from "react";
+import { useState, useRef, useEffect } from "react";
+import type { CSSProperties, ReactNode, KeyboardEvent } from "react";
 
 /* ─── types ─── */
 interface Link { label: string; url: string; icon: string; }
@@ -14,15 +15,15 @@ interface Training { title: string; period: string; }
 
 /* ─── color palette ─── */
 const C: Record<string, string> = {
-  green900:"#0f2b1d", green800:"#17412e", green700:"#1e5a3f", green600:"#267d55",
-  green500:"#2e9f6b", green400:"#52b788", green300:"#74c69d", green200:"#95d5b2",
-  green100:"#b7e4c7", green50:"#d8f3dc", greenGlass:"rgba(46,159,107,0.08)",
-  dark:"#0a0e12", dark2:"#12171e", dark3:"#1a2030", darkCard:"#161c26",
-  ink:"#e8edf4", ink2:"#b0bac8", muted:"#6b7a8d",
-  accent:"#5eead4", accentDim:"rgba(94,234,212,0.12)",
-  gold:"#f59e0b", goldDim:"rgba(245,158,11,0.12)",
-  rust:"#fb923c", rustDim:"rgba(251,146,60,0.12)",
-  white:"#ffffff", border:"#232d3b", borderLight:"#2a3545",
+  green900:"#0f3b2d", green800:"#1a4d3a", green700:"#265f49", green600:"#327158",
+  green500:"#3e8367", green400:"#4a9576", green300:"#a7d2c1", green200:"#c8e4d8",
+  green100:"#e9f5ef", green50:"#f2f8f5", greenGlass:"rgba(62,131,103,0.08)",
+  dark:"#1a202c", dark2:"#2d3748", dark3:"#4a5568", darkCard:"#ffffff",
+  ink:"#1a202c", ink2:"#4a5568", muted:"#718096",
+  accent:"#0d9488", accentDim:"rgba(13,148,136,0.08)",
+  gold:"#d97706", goldDim:"rgba(217,119,6,0.08)",
+  rust:"#ea580c", rustDim:"rgba(234,88,12,0.08)",
+  white:"#ffffff", border:"#e2e8f0", borderLight:"#f1f5f9",
 };
 
 const NAV = ["About","Research","Publications","Conferences","Experience","Skills"];
@@ -216,16 +217,16 @@ export default function Portfolio() {
   const cardStyle: CSSProperties = {
     background: C.darkCard, border: `1px solid ${C.border}`, borderRadius: 16,
     padding: "22px 26px", transition: "border-color 0.25s, transform 0.25s, box-shadow 0.25s",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
   };
-  const cardHover: CSSProperties = { borderColor: C.accent + "60", transform: "translateY(-2px)", boxShadow: `0 8px 32px rgba(0,0,0,0.3)` };
 
   return (
-    <div style={{ fontFamily: "'Inter',sans-serif", background: C.dark, minHeight: "100vh", color: C.ink }}>
+    <div style={{ fontFamily: "'Inter',sans-serif", background: C.white, minHeight: "100vh", color: C.ink }}>
 
       {/* ═══ TOP BAR ═══ */}
       <header style={{
         position: "sticky", top: 0, zIndex: 300,
-        background: "rgba(10,14,18,0.85)", backdropFilter: "blur(16px) saturate(180%)",
+        background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px) saturate(180%)",
         borderBottom: `1px solid ${C.border}`, height: 64,
         display: "flex", alignItems: "center", padding: "0 2.5rem", justifyContent: "space-between", gap: "1rem",
       }}>
@@ -265,7 +266,7 @@ export default function Portfolio() {
 
       {/* ═══ HERO ═══ */}
       <div style={{
-        background: `linear-gradient(135deg,${C.dark2} 0%,${C.green900} 40%,${C.green800} 70%,${C.dark3} 100%)`,
+        background: `linear-gradient(135deg,${C.green100} 0%,${C.green50} 100%)`,
         padding: "4.5rem 2.5rem", position: "relative", overflow: "hidden",
       }}>
         {/* decorative circles */}
@@ -416,7 +417,7 @@ export default function Portfolio() {
 
         {/* ─── PUBLICATIONS ─── */}
         <SecHead id="publications">Publications</SecHead>
-        <div style={{ display: "flex", gap: 4, marginBottom: 24, background: C.dark3, padding: 5, borderRadius: 12, width: "fit-content" }}>
+        <div style={{ display: "flex", gap: 4, marginBottom: 24, background: C.borderLight, padding: 5, borderRadius: 12, width: "fit-content" }}>
           {([["published", "Published", String(publications.length)], ["review", "Under Review", String(underReview.length)], ["working", "Working Papers", String(workingPapers.length)]] as [string, string, string][]).map(([k, v, count]) => (
             <button key={k} onClick={() => setPubTab(k)} style={{
               padding: "8px 16px", borderRadius: 8, fontSize: 13, cursor: "pointer", border: "none",
@@ -625,7 +626,7 @@ export default function Portfolio() {
       </main>
 
       {/* ═══ FOOTER ═══ */}
-      <footer style={{ textAlign: "center", padding: "2rem 2.5rem", borderTop: `1px solid ${C.border}`, color: C.muted, fontSize: 13, background: C.dark2 }}>
+      <footer style={{ textAlign: "center", padding: "2rem 2.5rem", borderTop: `1px solid ${C.border}`, color: C.muted, fontSize: 13, background: C.green50 }}>
         © {new Date().getFullYear()} {person.name} · {person.title} · {person.location}
       </footer>
     </div>
