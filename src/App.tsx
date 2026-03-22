@@ -19,41 +19,41 @@ interface TestItem { name: string; score: string; }
 /* Deep Forest Green + Crisp White + Sage + Mint */
 const C: Record<string, string> = {
   // Base — deep forest green (replaces navy)
-  navy:    "#0e3d2f",   // deep forest green
-  navy2:   "#145c44",
-  navy3:   "#1a7050",
+  navy: "#0e3d2f",   // deep forest green
+  navy2: "#145c44",
+  navy3: "#1a7050",
   navyMid: "#1b6645",
 
   // Surface — pure crisp whites with faint green tint
-  surface:     "#f4faf7",   // barely-there green white
+  surface: "#f4faf7",   // barely-there green white
   surfaceCard: "#ffffff",
-  surfaceAlt:  "#eaf5ef",
-  border:      "#d1e8dc",
+  surfaceAlt: "#eaf5ef",
+  border: "#d1e8dc",
   borderLight: "#e4f2eb",
 
   // Text — dark green-tinted ink
-  ink:  "#0e2a1e",
+  ink: "#0e2a1e",
   ink2: "#2d5243",
-  muted:"#6b9980",
+  muted: "#6b9980",
 
   // Primary accent — vivid emerald
-  amber:     "#0d9e72",   // renamed for code reuse; this is now emerald
+  amber: "#0d9e72",   // renamed for code reuse; this is now emerald
   amberBold: "#0a7d5a",
-  amberDim:  "rgba(13,158,114,0.10)",
+  amberDim: "rgba(13,158,114,0.10)",
   amberGlow: "rgba(13,158,114,0.18)",
 
   // Secondary accent — sage / mid green
-  teal:     "#2e8b6b",
-  tealLight:"#38a882",
-  tealDim:  "rgba(46,139,107,0.10)",
+  teal: "#2e8b6b",
+  tealLight: "#38a882",
+  tealDim: "rgba(46,139,107,0.10)",
   tealGlow: "rgba(46,139,107,0.18)",
 
   // Tertiary — muted slate-green for "under review"
-  terra:    "#4a7c6a",
+  terra: "#4a7c6a",
   terraDim: "rgba(74,124,106,0.12)",
 
   // Gold for awards — warm contrast pop
-  gold:    "#b08c1a",
+  gold: "#b08c1a",
   goldDim: "rgba(176,140,26,0.10)",
 
   // Gradient helpers
@@ -61,105 +61,106 @@ const C: Record<string, string> = {
   cardGrad: "linear-gradient(135deg,#f4faf7,#ffffff)",
 };
 
-const NAV = ["About","Education","Research","Publications","Conferences","Experience","Skills"];
+const NAV = ["About", "Education", "Research", "Publications", "Conferences", "Experience", "Skills"];
 
 /* ─── initial data ─── */
 const INIT_PERSON = {
-  name:"Tanmay Datta", title:"Agricultural Economist",
-  institution:"Sher-e-Bangla Agricultural University", location:"Dhaka-1207, Bangladesh",
-  email:"tanmaydatta67@gmail.com", phone:"(+880) 1758279651",
-  about:`Agricultural Economics researcher with a deep interest in Development Economics — specifically how economic and policy factors shape household welfare, rural livelihoods, and food and nutrition security in developing-country contexts. I gravitate toward research that connects real-world development challenges with rigorous empirical evidence: improving agricultural productivity, strengthening resilience to climate shocks, and designing policies that reduce vulnerability and inequality.`,
-  interests:["Development Economics","Agricultural Productivity","Climate Resilience","Food & Nutrition Security","Household Welfare","Econometrics","Machine Learning in Agriculture"],
-  links:[
-    {label:"LinkedIn",url:"https://linkedin.com/in/tanmay-datta-a7a23719b",icon:"in"},
-    {label:"Google Scholar",url:"https://scholar.google.com/citations?user=fNbF88wAAAAJ&hl=en",icon:"gs"},
-    {label:"ResearchGate",url:"https://www.researchgate.net/profile/Tanmay-Datta-3",icon:"rg"},
-    {label:"ORCID",url:"https://orcid.org/0009-0000-5548-4426",icon:"or"},
+  name: "Tanmay Datta", title: "Agricultural Economist",
+  institution: "Sher-e-Bangla Agricultural University", location: "Dhaka-1207, Bangladesh",
+  email: "tanmaydatta67@gmail.com", phone: "(+880) 1758279651",
+  about: `Agricultural Economics researcher with a deep interest in Development Economics — specifically how economic and policy factors shape household welfare, rural livelihoods, and food and nutrition security in developing-country contexts. I gravitate toward research that connects real-world development challenges with rigorous empirical evidence: improving agricultural productivity, strengthening resilience to climate shocks, and designing policies that reduce vulnerability and inequality.`,
+  interests: ["Development Economics", "Agricultural Productivity", "Climate Resilience", "Food & Nutrition Security", "Household Welfare", "Econometrics", "Machine Learning in Agriculture"],
+  links: [
+    { label: "LinkedIn", url: "https://linkedin.com/in/tanmay-datta-a7a23719b", icon: "in" },
+    { label: "Google Scholar", url: "https://scholar.google.com/citations?user=fNbF88wAAAAJ&hl=en", icon: "gs" },
+    { label: "ResearchGate", url: "https://www.researchgate.net/profile/Tanmay-Datta-3", icon: "rg" },
+    { label: "ORCID", url: "https://orcid.org/0009-0000-5548-4426", icon: "or" },
   ] as Link[],
+  image: "https://i.ibb.co.com/0RcCkzb9/tanmaypic.png",
 };
 
 const INIT_PUBLICATIONS: Publication[] = [
-  {authors:"Sarker, M.M.R., Aleen, M.J. & Datta, T.",year:2025,title:"Productivity of Food and Self-Sufficiency in Rice Production in Bangladesh",journal:"Economics",details:"12(3), pp. 214–226",url:"https://www.davidpublisher.com/index.php/Home/Article/index?id=52177.html"},
-  {authors:"Sarker, M.M.R., Aleen, M.J. & Datta, T.",year:2025,title:"Agricultural Transformation and Its Contribution to Economic Development in South Asian and African Countries",journal:"Asian Journal of Advances in Agricultural Research",details:"25(1), pp. 19–31",url:"https://journalajaar.com/index.php/AJAAR/article/view/577"},
+  { authors: "Sarker, M.M.R., Aleen, M.J. & Datta, T.", year: 2025, title: "Productivity of Food and Self-Sufficiency in Rice Production in Bangladesh", journal: "Economics", details: "12(3), pp. 214–226", url: "https://www.davidpublisher.com/index.php/Home/Article/index?id=52177.html" },
+  { authors: "Sarker, M.M.R., Aleen, M.J. & Datta, T.", year: 2025, title: "Agricultural Transformation and Its Contribution to Economic Development in South Asian and African Countries", journal: "Asian Journal of Advances in Agricultural Research", details: "25(1), pp. 19–31", url: "https://journalajaar.com/index.php/AJAAR/article/view/577" },
 ];
 
 const INIT_UNDER_REVIEW: ReviewItem[] = [
-  {title:"Determinants of Climate-Smart Agriculture (CSA) in Mushroom Farming: Dual Application of Bayesian and Machine Learning Approach",journal:"Scientific Reports"},
-  {title:"Multilevel Model Assessing Women's ICT Adoption in Bangladesh",journal:"Social Sciences & Humanities"},
-  {title:"Evaluating Machine Learning Models for Intimate Partner Violence Detection in Bangladesh",journal:"Sociology"},
-  {title:"The Impact of Climate Change and Renewable Energy on Agricultural Productivity in Bangladesh: An Empirical Assessment Using ARDL Approach",journal:"Discover Sustainability"},
+  { title: "Determinants of Climate-Smart Agriculture (CSA) in Mushroom Farming: Dual Application of Bayesian and Machine Learning Approach", journal: "Scientific Reports" },
+  { title: "Multilevel Model Assessing Women's ICT Adoption in Bangladesh", journal: "Social Sciences & Humanities" },
+  { title: "Evaluating Machine Learning Models for Intimate Partner Violence Detection in Bangladesh", journal: "Sociology" },
+  { title: "The Impact of Climate Change and Renewable Energy on Agricultural Productivity in Bangladesh: An Empirical Assessment Using ARDL Approach", journal: "Discover Sustainability" },
 ];
 
 const INIT_WORKING_PAPERS: WorkingPaper[] = [
-  {title:"Pathways from Household Food Insecurity and Undernutrition to Under-Five Mortality: Systematic Evidence from Asian Countries",role:"First Author"},
-  {title:"Child Education in Indigenous Communities: Barriers, Enablers and Policy Responses Across South Asian Countries",role:"First Author"},
-  {title:"Climate-Smart Agriculture and Household Well-Being: Food Security, Poverty and Resilience Outcomes in Asia and Africa",role:"First Author"},
-  {title:"Crop Insurance: Why Are Farmers Reluctant to Adopt Crop Insurance Over Traditional Risk Management Strategies?",role:"Co-Author"},
-  {title:"The U.S. Withdrawal from the Paris Agreement: Implications for Global Climate Finance and Carbon Emission Space",role:"Co-Author"},
-  {title:"The Role of Women's Asset Ownership in Child Health and Nutrition",role:"Co-Author"},
-  {title:"Household Food Security, Determinants and Coping Strategies Among Smallholder Farmers in Riverbank and Haor Areas of Bangladesh",role:"Co-Author"},
-  {title:"Data-Driven IoT Applications in Livestock Farming: Evolution, Adoption, and Economic Impact",role:"Co-Author"},
-  {title:"Transboundary Animal Diseases and Their Economic Impact on Smallholder Livestock Systems",role:"Co-Author"},
+  { title: "Pathways from Household Food Insecurity and Undernutrition to Under-Five Mortality: Systematic Evidence from Asian Countries", role: "First Author" },
+  { title: "Child Education in Indigenous Communities: Barriers, Enablers and Policy Responses Across South Asian Countries", role: "First Author" },
+  { title: "Climate-Smart Agriculture and Household Well-Being: Food Security, Poverty and Resilience Outcomes in Asia and Africa", role: "First Author" },
+  { title: "Crop Insurance: Why Are Farmers Reluctant to Adopt Crop Insurance Over Traditional Risk Management Strategies?", role: "Co-Author" },
+  { title: "The U.S. Withdrawal from the Paris Agreement: Implications for Global Climate Finance and Carbon Emission Space", role: "Co-Author" },
+  { title: "The Role of Women's Asset Ownership in Child Health and Nutrition", role: "Co-Author" },
+  { title: "Household Food Security, Determinants and Coping Strategies Among Smallholder Farmers in Riverbank and Haor Areas of Bangladesh", role: "Co-Author" },
+  { title: "Data-Driven IoT Applications in Livestock Farming: Evolution, Adoption, and Economic Impact", role: "Co-Author" },
+  { title: "Transboundary Animal Diseases and Their Economic Impact on Smallholder Livestock Systems", role: "Co-Author" },
 ];
 
 const INIT_RESEARCH: ResearchBlock[] = [
   {
-    role:"Research Associate", color:C.teal,
-    dept:"Dept. of Agricultural Statistics, Faculty of Agribusiness Management, SAU",
-    projects:[
-      {period:"Sep–Nov 2024",title:"2024 Bangladesh Shrimp Survey",funder:"ADB Institute / University of Tokyo",bullets:["Primary data collection from shrimp-farming households and stakeholders","Structured data entry and dataset cleaning for subsequent analysis","Fieldwork coordination under Prof. Dr. Md. Mizanur Rahman Sarker"]},
-      {period:"Jul 2024–Jan 2025",title:"Impact of CSA Technologies on Food Security in Haor Area, Sunamganj",funder:"SAURES",bullets:["Farm-level data collection on CSA technologies and household food security","Research report writing and final project documentation"]},
-      {period:"Jan–Jun 2023",title:"Validation and Adoption of CSTs for Shrimp Farming in Coastal Ecosystems",funder:"Ministry of Science & Technology, Bangladesh",bullets:["Field implementation and data collection in coastal shrimp-farming areas","Prepared summary documents for ministry submission"]},
+    role: "Research Associate", color: C.teal,
+    dept: "Dept. of Agricultural Statistics, Faculty of Agribusiness Management, SAU",
+    projects: [
+      { period: "Sep–Nov 2024", title: "2024 Bangladesh Shrimp Survey", funder: "ADB Institute / University of Tokyo", bullets: ["Primary data collection from shrimp-farming households and stakeholders", "Structured data entry and dataset cleaning for subsequent analysis", "Fieldwork coordination under Prof. Dr. Md. Mizanur Rahman Sarker"] },
+      { period: "Jul 2024–Jan 2025", title: "Impact of CSA Technologies on Food Security in Haor Area, Sunamganj", funder: "SAURES", bullets: ["Farm-level data collection on CSA technologies and household food security", "Research report writing and final project documentation"] },
+      { period: "Jan–Jun 2023", title: "Validation and Adoption of CSTs for Shrimp Farming in Coastal Ecosystems", funder: "Ministry of Science & Technology, Bangladesh", bullets: ["Field implementation and data collection in coastal shrimp-farming areas", "Prepared summary documents for ministry submission"] },
     ],
   },
   {
-    role:"Research Assistant", color:C.amber,
-    dept:"Dept. of Agricultural Statistics, Faculty of Agribusiness Management, SAU",
-    projects:[
-      {period:"Jun 2023–Jun 2024",title:"Impact of CSA in Mushroom Farming: Classical & Machine Learning Approaches",funder:"SAURES",bullets:["Data entry, cleaning and organisation for farm-level survey data","Contributed to manuscript preparation and report writing"]},
-      {period:"Apr 2023–Jun 2024",title:"ML Algorithms to Predict Depression & Suicidal Behaviours Among University Students",funder:"University Grants Commission (UGC), Bangladesh",bullets:["Data entry, coding and statistical/ML analysis using R and SPSS","Drafted analytical sections of project reports and manuscripts"]},
-      {period:"Jun 2023–Jun 2024",title:"Impact of CSA in Rice Farming in Coastal Ecosystems",funder:"Ministry of Science & Technology, Bangladesh",bullets:["Data entry and database management for coastal rice-farming surveys"]},
-      {period:"Dec 2022–Jun 2023",title:"KAP Toward Environmental Education: Secondary-Level Students in Bangladesh",funder:"Ministry of Science & Technology, Bangladesh",bullets:["Data entry, cleaning and preliminary statistical analysis","Assisted in preparing research reports and presentations"]},
+    role: "Research Assistant", color: C.amber,
+    dept: "Dept. of Agricultural Statistics, Faculty of Agribusiness Management, SAU",
+    projects: [
+      { period: "Jun 2023–Jun 2024", title: "Impact of CSA in Mushroom Farming: Classical & Machine Learning Approaches", funder: "SAURES", bullets: ["Data entry, cleaning and organisation for farm-level survey data", "Contributed to manuscript preparation and report writing"] },
+      { period: "Apr 2023–Jun 2024", title: "ML Algorithms to Predict Depression & Suicidal Behaviours Among University Students", funder: "University Grants Commission (UGC), Bangladesh", bullets: ["Data entry, coding and statistical/ML analysis using R and SPSS", "Drafted analytical sections of project reports and manuscripts"] },
+      { period: "Jun 2023–Jun 2024", title: "Impact of CSA in Rice Farming in Coastal Ecosystems", funder: "Ministry of Science & Technology, Bangladesh", bullets: ["Data entry and database management for coastal rice-farming surveys"] },
+      { period: "Dec 2022–Jun 2023", title: "KAP Toward Environmental Education: Secondary-Level Students in Bangladesh", funder: "Ministry of Science & Technology, Bangladesh", bullets: ["Data entry, cleaning and preliminary statistical analysis", "Assisted in preparing research reports and presentations"] },
     ],
   },
 ];
 
 const INIT_CONFERENCES: Conference[] = [
-  {type:"Oral Presentation",event:"CUKUROVA 16th International Scientific Research Conference",location:"Adana, Türkiye (Online)",date:"Nov 2025",note:"Household food security & climate change adaptation in haor and riverbank areas of Bangladesh"},
-  {type:"Poster Presentation",event:"7th International Scientific Conference on Food Safety and Health (ISCFSH)",location:"Bangladesh",date:"May 2025",note:"Organised by Bangladesh Society for Safe Food (BSSF)"},
-  {type:"Abstract Accepted",event:"6th International Conference on Agriculture, Food Security and Safety 2025 (Hybrid)",location:"Kuala Lumpur, Malaysia",date:"Aug 2025",note:""},
-  {type:"Abstract Accepted",event:"International Conference on Smart Agriculture, Environment and Global Warming (SAEGW-2025)",location:"Daegu, South Korea (Hybrid)",date:"May 2025",note:"International Society for Research (ISR)"},
+  { type: "Oral Presentation", event: "CUKUROVA 16th International Scientific Research Conference", location: "Adana, Türkiye (Online)", date: "Nov 2025", note: "Household food security & climate change adaptation in haor and riverbank areas of Bangladesh" },
+  { type: "Poster Presentation", event: "7th International Scientific Conference on Food Safety and Health (ISCFSH)", location: "Bangladesh", date: "May 2025", note: "Organised by Bangladesh Society for Safe Food (BSSF)" },
+  { type: "Abstract Accepted", event: "6th International Conference on Agriculture, Food Security and Safety 2025 (Hybrid)", location: "Kuala Lumpur, Malaysia", date: "Aug 2025", note: "" },
+  { type: "Abstract Accepted", event: "International Conference on Smart Agriculture, Environment and Global Warming (SAEGW-2025)", location: "Daegu, South Korea (Hybrid)", date: "May 2025", note: "International Society for Research (ISR)" },
 ];
 
 const INIT_EXPERIENCE: ExperienceItem[] = [{
-  role:"Junior Executive — Communication & Public Relations",
-  org:"Greeniculture Agrotech Limited",location:"Dhaka, Bangladesh",
-  period:"May 2021 – March 2023",
-  bullets:["Supported corporate communication and public relations activities","Prepared notices, content, and stakeholder communications","Coordinated with internal teams to maintain professional relationships"],
-  award:"Best Employee of the Month — September 2021",
+  role: "Junior Executive — Communication & Public Relations",
+  org: "Greeniculture Agrotech Limited", location: "Dhaka, Bangladesh",
+  period: "May 2021 – March 2023",
+  bullets: ["Supported corporate communication and public relations activities", "Prepared notices, content, and stakeholder communications", "Coordinated with internal teams to maintain professional relationships"],
+  award: "Best Employee of the Month — September 2021",
 }];
 
 const INIT_LEADERSHIP: LeadershipItem[] = [
-  {role:"Club Development Adviser",org:"ICT & Career Development Club, SAU",period:"Feb 2025 – Present",icon:"🏛"},
-  {role:"President",org:"BADHAN Voluntary Blood Donors' Organisation, SAU Unit",period:"Jan 2023 – Dec 2023",icon:"🩸"},
-  {role:"Secretary",org:"Rotaract Club of Dhaka Mid City Green",period:"Jul 2023 – Jun 2024",icon:"🔄"},
-  {role:"Zonal Secretary, Zone 3A",org:"Rotaract District Organisation 3281, Bangladesh",period:"May 2023 – May 2024",icon:"🌐"},
-  {role:"Vice-President",org:"Entrepreneurship Development Club, SAU",period:"May 2023 – Feb 2025",icon:"💡"},
-  {role:"Head of Event Management",org:"Hult Prize at SAU",period:"Aug 2020 – Jul 2021",icon:"🏆"},
+  { role: "Club Development Adviser", org: "ICT & Career Development Club, SAU", period: "Feb 2025 – Present", icon: "🏛" },
+  { role: "President", org: "BADHAN Voluntary Blood Donors' Organisation, SAU Unit", period: "Jan 2023 – Dec 2023", icon: "🩸" },
+  { role: "Secretary", org: "Rotaract Club of Dhaka Mid City Green", period: "Jul 2023 – Jun 2024", icon: "🔄" },
+  { role: "Zonal Secretary, Zone 3A", org: "Rotaract District Organisation 3281, Bangladesh", period: "May 2023 – May 2024", icon: "🌐" },
+  { role: "Vice-President", org: "Entrepreneurship Development Club, SAU", period: "May 2023 – Feb 2025", icon: "💡" },
+  { role: "Head of Event Management", org: "Hult Prize at SAU", period: "Aug 2020 – Jul 2021", icon: "🏆" },
 ];
 
-const INIT_SKILLS: string[] = ["R (R Programming)","Stata","SPSS","MS Word / Excel / PowerPoint"];
-const INIT_COMPETENCIES: string[] = ["Econometric Analysis","Survey Design","Data Cleaning","Academic Writing","Policy Writing","Machine Learning","R Programming","SPSS Modelling"];
+const INIT_SKILLS: string[] = ["R (R Programming)", "Stata", "SPSS", "MS Word / Excel / PowerPoint"];
+const INIT_COMPETENCIES: string[] = ["Econometric Analysis", "Survey Design", "Data Cleaning", "Academic Writing", "Policy Writing", "Machine Learning", "R Programming", "SPSS Modelling"];
 const INIT_TRAININGS: Training[] = [
-  {title:"Agri-Science Leadership Development Training (Virtual)",period:"Nov–Dec 2020"},
-  {title:"SPSS Training for Agricultural Experiments and Research",period:"Nov 2024 – Jan 2025"},
-  {title:"Training on Data Analysis (R and SPSS)",period:"May 7–8, 2025"},
+  { title: "Agri-Science Leadership Development Training (Virtual)", period: "Nov–Dec 2020" },
+  { title: "SPSS Training for Agricultural Experiments and Research", period: "Nov 2024 – Jan 2025" },
+  { title: "Training on Data Analysis (R and SPSS)", period: "May 7–8, 2025" },
 ];
 
 const INIT_EDUCATION: EducationItem[] = [
-  { degree: "B.Sc. (Hons.) in Agricultural Economics", school: "Sher-e-Bangla Agricultural University", location: "Dhaka 1207, Bangladesh",  year: "Passing year: 2022; Result Published: 2024" },
+  { degree: "B.Sc. (Hons.) in Agricultural Economics", school: "Sher-e-Bangla Agricultural University", location: "Dhaka 1207, Bangladesh", year: "Passing year: 2022; Result Published: 2024" },
   { degree: "Higher Secondary Certificate (HSC), Science", school: "Notre Dame College", location: "Dhaka, Bangladesh", year: "Passing year: 2017" },
-  { degree: "Secondary School Certificate (SSC), Science", school: "Comilla Zilla School", location: "Cumilla, Bangladesh",  year: "Passing year: 2015" },
+  { degree: "Secondary School Certificate (SSC), Science", school: "Comilla Zilla School", location: "Cumilla, Bangladesh", year: "Passing year: 2015" },
 ];
 
 const INIT_TESTS: TestItem[] = [
@@ -331,15 +332,30 @@ export default function Portfolio() {
         <div style={{ position: "absolute", left: -80, top: "20%", width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle,rgba(13,158,114,0.08),transparent 70%)`, pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", gap: "3rem", position: "relative", zIndex: 1, flexWrap: "wrap" }}>
-          {/* Avatar */}
           <div style={{
-            width: 96, height: 96, borderRadius: 16,
+            width: 120, height: 120, borderRadius: 16,
             background: "rgba(13,158,114,0.12)",
             border: `2px solid rgba(13,158,114,0.30)`,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: 28, fontWeight: 700, color: C.navy, flexShrink: 0,
             fontFamily: "'Roboto', sans-serif",
-          }}>TD</div>
+            overflow: "hidden", position: "relative"
+          }}>
+            {person.image ? (
+              <img src={person.image} alt={person.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            ) : "TD"}
+            {editMode && (
+              <div style={{ position: "absolute", bottom: 0, width: "100%", background: "rgba(0,0,0,0.6)", padding: 4, textAlign: "center" }}>
+                <input
+                  type="text"
+                  placeholder="Image URL"
+                  value={person.image || ""}
+                  onChange={e => updatePerson("image", e.target.value)}
+                  style={{ width: "90%", fontSize: 10, background: "transparent", color: "white", border: "none", outline: "none" }}
+                />
+              </div>
+            )}
+          </div>
 
           <div style={{ flex: 1, minWidth: 260 }}>
             {/* Name */}
@@ -443,9 +459,9 @@ export default function Portfolio() {
               </div>
             </div>
           ))}
-          {editMode && <button onClick={() => setEducation([...education, { degree: "Degree Name", school: "University", location: "Location",  year: "Year" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "16px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" }}>+ Add Education</button>}
+          {editMode && <button onClick={() => setEducation([...education, { degree: "Degree Name", school: "University", location: "Location", year: "Year" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "16px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" }}>+ Add Education</button>}
         </div>
-'['
+
         {/* ─── STANDARDIZED TESTS ─── */}
         <div style={{ marginBottom: 34 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
@@ -469,82 +485,83 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <Hr />
-       <div style={{ marginBottom: 26}}>
-         <div style={{ display: "flex", gap: 3, marginBottom: 26, background: C.borderLight, padding: 5, borderRadius: 10, width: "fit-content" }}>
-          {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "Working Papers", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
-            <button key={k} onClick={() => setPubTab(k)} style={{
-              padding: "8px 16px", borderRadius: 7, fontSize: 12.5, cursor: "pointer", border: "none",
-              background: pubTab === k ? C.surfaceCard : "transparent",
-              color: pubTab === k ? col : C.muted,
-              fontWeight: pubTab === k ? 700 : 400,
-              boxShadow: pubTab === k ? "0 2px 8px rgba(13,27,42,0.08)" : "none",
-              transition: "all 0.2s",
-              display: "flex", alignItems: "center", gap: 6,
-            }}>
-              {v}
-              <span style={{ background: pubTab === k ? col + "18" : "transparent", color: pubTab === k ? col : C.muted, padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 700 }}>{count}</span>
-            </button>
-          ))}
-        </div>
 
-        {pubTab === "published" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {publications.map((p, i) => (
-              <div key={i} style={{ ...cardStyle, position: "relative", overflow: "hidden", borderLeft: `3px solid ${C.teal}` }}>
-                {editMode && <button onClick={() => setPublications(publications.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700, zIndex: 2 }}>×</button>}
-                {/* Year badge */}
-                <div style={{ position: "absolute", top: 0, right: editMode ? 48 : 0, background: C.navy, color: C.amber, fontSize: 11, fontWeight: 800, padding: "5px 16px", borderRadius: "0 12px 0 10px", letterSpacing: "0.05em" }}>{p.year}</div>
-                <EditableText editMode={editMode} value={p.title} onChange={v => { const np = [...publications]; np[i] = { ...np[i], title: v }; setPublications(np); }}
-                  tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15.5, fontWeight: 600, color: C.navy, lineHeight: 1.55, marginBottom: 8, paddingRight: 56 }} />
-                <EditableText editMode={editMode} value={p.authors} onChange={v => { const np = [...publications]; np[i] = { ...np[i], authors: v }; setPublications(np); }}
-                  tag="div" style={{ fontSize: 12.5, color: C.ink2, marginBottom: 14 }} />
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
-                  <div>
-                    <span style={{ fontWeight: 700, color: C.teal, fontSize: 13 }}>{p.journal}</span>
-                    <span style={{ fontSize: 13, color: C.muted }}> — {p.details}</span>
+        <SecHead id="publications">Publications</SecHead>
+        <div style={{ marginBottom: 26 }}>
+          <div style={{ display: "flex", gap: 3, marginBottom: 26, background: C.borderLight, padding: 5, borderRadius: 10, width: "fit-content" }}>
+            {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "Working Papers", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
+              <button key={k} onClick={() => setPubTab(k)} style={{
+                padding: "8px 16px", borderRadius: 7, fontSize: 12.5, cursor: "pointer", border: "none",
+                background: pubTab === k ? C.surfaceCard : "transparent",
+                color: pubTab === k ? col : C.muted,
+                fontWeight: pubTab === k ? 700 : 400,
+                boxShadow: pubTab === k ? "0 2px 8px rgba(13,27,42,0.08)" : "none",
+                transition: "all 0.2s",
+                display: "flex", alignItems: "center", gap: 6,
+              }}>
+                {v}
+                <span style={{ background: pubTab === k ? col + "18" : "transparent", color: pubTab === k ? col : C.muted, padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 700 }}>{count}</span>
+              </button>
+            ))}
+          </div>
+
+          {pubTab === "published" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {publications.map((p, i) => (
+                <div key={i} style={{ ...cardStyle, position: "relative", overflow: "hidden", borderLeft: `3px solid ${C.teal}` }}>
+                  {editMode && <button onClick={() => setPublications(publications.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700, zIndex: 2 }}>×</button>}
+                  {/* Year badge */}
+                  <div style={{ position: "absolute", top: 0, right: editMode ? 48 : 0, background: C.navy, color: C.amber, fontSize: 11, fontWeight: 800, padding: "5px 16px", borderRadius: "0 12px 0 10px", letterSpacing: "0.05em" }}>{p.year}</div>
+                  <EditableText editMode={editMode} value={p.title} onChange={v => { const np = [...publications]; np[i] = { ...np[i], title: v }; setPublications(np); }}
+                    tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15.5, fontWeight: 600, color: C.navy, lineHeight: 1.55, marginBottom: 8, paddingRight: 56 }} />
+                  <EditableText editMode={editMode} value={p.authors} onChange={v => { const np = [...publications]; np[i] = { ...np[i], authors: v }; setPublications(np); }}
+                    tag="div" style={{ fontSize: 12.5, color: C.ink2, marginBottom: 14 }} />
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
+                    <div>
+                      <span style={{ fontWeight: 700, color: C.teal, fontSize: 13 }}>{p.journal}</span>
+                      <span style={{ fontSize: 13, color: C.muted }}> — {p.details}</span>
+                    </div>
+                    <a href={p.url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: C.amber, border: `1px solid ${C.amber}40`, padding: "6px 16px", borderRadius: 6, textDecoration: "none", fontWeight: 700, background: C.amberDim, whiteSpace: "nowrap" }}>View Article →</a>
                   </div>
-                  <a href={p.url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: C.amber, border: `1px solid ${C.amber}40`, padding: "6px 16px", borderRadius: 6, textDecoration: "none", fontWeight: 700, background: C.amberDim, whiteSpace: "nowrap" }}>View Article →</a>
                 </div>
-              </div>
-            ))}
-            {editMode && <button onClick={() => setPublications([...publications, { authors: "Author Name", year: new Date().getFullYear(), title: "New Publication Title", journal: "Journal Name", details: "Volume, Pages", url: "#" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Publication</button>}
-          </div>
-        )}
+              ))}
+              {editMode && <button onClick={() => setPublications([...publications, { authors: "Author Name", year: new Date().getFullYear(), title: "New Publication Title", journal: "Journal Name", details: "Volume, Pages", url: "#" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Publication</button>}
+            </div>
+          )}
 
-        {pubTab === "review" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {underReview.map((p, i) => (
-              <div key={i} style={{ ...cardStyle, borderLeft: `3px solid ${C.terra}`, position: "relative" }}>
-                {editMode && <button onClick={() => setUnderReview(underReview.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700 }}>×</button>}
-                <span style={{ fontSize: 10.5, fontWeight: 700, background: C.terraDim, color: C.terra, padding: "3px 10px", borderRadius: 4, textTransform: "uppercase", letterSpacing: "0.06em" }}>Under Review</span>
-                <EditableText editMode={editMode} value={p.title} onChange={v => { const nr = [...underReview]; nr[i] = { ...nr[i], title: v }; setUnderReview(nr); }}
-                  tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14.5, fontWeight: 500, color: C.navy, lineHeight: 1.65, marginTop: 10, marginBottom: 6 }} />
-                <EditableText editMode={editMode} value={p.journal} onChange={v => { const nr = [...underReview]; nr[i] = { ...nr[i], journal: v }; setUnderReview(nr); }}
-                  tag="div" style={{ fontSize: 12, color: C.teal, fontWeight: 700 }} />
-              </div>
-            ))}
-            {editMode && <button onClick={() => setUnderReview([...underReview, { title: "New Paper Title", journal: "Journal Name" }])} style={{ background: C.terraDim, border: `2px dashed ${C.terra}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.terra, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Under Review Paper</button>}
-          </div>
-        )}
+          {pubTab === "review" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {underReview.map((p, i) => (
+                <div key={i} style={{ ...cardStyle, borderLeft: `3px solid ${C.terra}`, position: "relative" }}>
+                  {editMode && <button onClick={() => setUnderReview(underReview.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700 }}>×</button>}
+                  <span style={{ fontSize: 10.5, fontWeight: 700, background: C.terraDim, color: C.terra, padding: "3px 10px", borderRadius: 4, textTransform: "uppercase", letterSpacing: "0.06em" }}>Under Review</span>
+                  <EditableText editMode={editMode} value={p.title} onChange={v => { const nr = [...underReview]; nr[i] = { ...nr[i], title: v }; setUnderReview(nr); }}
+                    tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14.5, fontWeight: 500, color: C.navy, lineHeight: 1.65, marginTop: 10, marginBottom: 6 }} />
+                  <EditableText editMode={editMode} value={p.journal} onChange={v => { const nr = [...underReview]; nr[i] = { ...nr[i], journal: v }; setUnderReview(nr); }}
+                    tag="div" style={{ fontSize: 12, color: C.teal, fontWeight: 700 }} />
+                </div>
+              ))}
+              {editMode && <button onClick={() => setUnderReview([...underReview, { title: "New Paper Title", journal: "Journal Name" }])} style={{ background: C.terraDim, border: `2px dashed ${C.terra}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.terra, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Under Review Paper</button>}
+            </div>
+          )}
 
-        {pubTab === "working" && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {workingPapers.map((p, i) => (
-              <div key={i} style={{ ...cardStyle, display: "flex", gap: 14, alignItems: "flex-start", position: "relative" }}>
-                {editMode && <button onClick={() => setWorkingPapers(workingPapers.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700 }}>×</button>}
-                <span style={{ fontSize: 11, fontWeight: 700, background: p.role === "First Author" ? C.tealDim : C.amberDim, color: p.role === "First Author" ? C.teal : C.amber, padding: "4px 10px", borderRadius: 4, flexShrink: 0, marginTop: 2, whiteSpace: "nowrap", border: `1px solid ${p.role === "First Author" ? C.teal : C.amber}25` }}>
-                  {p.role === "First Author" ? "1st Author" : "Co-Author"}
-                </span>
-                <EditableText editMode={editMode} value={p.title} onChange={v => { const nw = [...workingPapers]; nw[i] = { ...nw[i], title: v }; setWorkingPapers(nw); }}
-                  tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14, fontWeight: 400, color: C.ink2, lineHeight: 1.65 }} />
-              </div>
-            ))}
-            {editMode && <button onClick={() => setWorkingPapers([...workingPapers, { title: "New Working Paper Title", role: "First Author" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Working Paper</button>}
-          </div>
-        )}
-       </div>
-{/* publication end */}
+          {pubTab === "working" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {workingPapers.map((p, i) => (
+                <div key={i} style={{ ...cardStyle, display: "flex", gap: 14, alignItems: "flex-start", position: "relative" }}>
+                  {editMode && <button onClick={() => setWorkingPapers(workingPapers.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700 }}>×</button>}
+                  <span style={{ fontSize: 11, fontWeight: 700, background: p.role === "First Author" ? C.tealDim : C.amberDim, color: p.role === "First Author" ? C.teal : C.amber, padding: "4px 10px", borderRadius: 4, flexShrink: 0, marginTop: 2, whiteSpace: "nowrap", border: `1px solid ${p.role === "First Author" ? C.teal : C.amber}25` }}>
+                    {p.role === "First Author" ? "1st Author" : "Co-Author"}
+                  </span>
+                  <EditableText editMode={editMode} value={p.title} onChange={v => { const nw = [...workingPapers]; nw[i] = { ...nw[i], title: v }; setWorkingPapers(nw); }}
+                    tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 14, fontWeight: 400, color: C.ink2, lineHeight: 1.65 }} />
+                </div>
+              ))}
+              {editMode && <button onClick={() => setWorkingPapers([...workingPapers, { title: "New Working Paper Title", role: "First Author" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Working Paper</button>}
+            </div>
+          )}
+        </div>
+        {/* publication end */}
 
 
         {/* ─── RESEARCH ─── */}
@@ -658,7 +675,7 @@ export default function Portfolio() {
         {experience.map((exp, i) => (
           <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden", marginBottom: 32 }}>
             {/* Header band */}
-            <div style={{ background: C.navy3,color:'white', padding: "22px 26px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
+            <div style={{ background: C.navy3, color: 'white', padding: "22px 26px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
               <div>
                 <EditableText editMode={editMode} value={exp.role} onChange={v => { const ne = [...experience]; ne[i] = { ...ne[i], role: v }; setExperience(ne); }}
                   tag="div" style={{ fontSize: 17, fontWeight: 800, color: C.navy, fontFamily: "'Roboto', sans-serif" }} />
