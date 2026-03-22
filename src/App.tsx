@@ -12,7 +12,7 @@ interface Conference { type: string; event: string; location: string; date: stri
 interface ExperienceItem { role: string; org: string; location: string; period: string; bullets: string[]; award: string; }
 interface LeadershipItem { role: string; org: string; period: string; icon: string; }
 interface Training { title: string; period: string; }
-interface EducationItem { degree: string; school: string; location: string; details: string; year: string; }
+interface EducationItem { degree: string; school: string; location: string; year: string; }
 interface TestItem { name: string; score: string; }
 
 /* ─── REFINED COLOR PALETTE ─── */
@@ -157,9 +157,9 @@ const INIT_TRAININGS: Training[] = [
 ];
 
 const INIT_EDUCATION: EducationItem[] = [
-  { degree: "B.Sc. (Hons.) in Agricultural Economics", school: "Sher-e-Bangla Agricultural University", location: "Dhaka 1207, Bangladesh", details: "CGPA: 3.30 / 4.00", year: "Passing year: 2022; Result Published: 2024" },
-  { degree: "Higher Secondary Certificate (HSC), Science", school: "Notre Dame College", location: "Dhaka, Bangladesh", details: "GPA: 5.00 / 5.00", year: "Passing year: 2017" },
-  { degree: "Secondary School Certificate (SSC), Science", school: "Comilla Zilla School", location: "Cumilla, Bangladesh", details: "GPA: 5.00 / 5.00", year: "Passing year: 2015" },
+  { degree: "B.Sc. (Hons.) in Agricultural Economics", school: "Sher-e-Bangla Agricultural University", location: "Dhaka 1207, Bangladesh",  year: "Passing year: 2022; Result Published: 2024" },
+  { degree: "Higher Secondary Certificate (HSC), Science", school: "Notre Dame College", location: "Dhaka, Bangladesh", year: "Passing year: 2017" },
+  { degree: "Secondary School Certificate (SSC), Science", school: "Comilla Zilla School", location: "Cumilla, Bangladesh",  year: "Passing year: 2015" },
 ];
 
 const INIT_TESTS: TestItem[] = [
@@ -437,16 +437,15 @@ export default function Portfolio() {
                   <EditableText editMode={editMode} value={edu.location} onChange={v => { const ne = [...education]; ne[i].location = v; setEducation(ne); }}
                     tag="div" style={{ fontSize: 13, color: C.muted, marginBottom: 8 }} />
                   <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                    <span style={{ fontSize: 13, color: C.ink, fontWeight: 500 }}>{edu.details}</span>
                     <span style={{ fontSize: 13, color: C.muted }}>{edu.year}</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          {editMode && <button onClick={() => setEducation([...education, { degree: "Degree Name", school: "University", location: "Location", details: "CGPA", year: "Year" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "16px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" }}>+ Add Education</button>}
+          {editMode && <button onClick={() => setEducation([...education, { degree: "Degree Name", school: "University", location: "Location",  year: "Year" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 12, padding: "16px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" }}>+ Add Education</button>}
         </div>
-
+'['
         {/* ─── STANDARDIZED TESTS ─── */}
         <div style={{ marginBottom: 34 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
