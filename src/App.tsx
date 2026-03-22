@@ -301,7 +301,7 @@ export default function Portfolio() {
           #menu-toggle { display: flex !important; }
           #hero-container { flex-direction: column; text-align: center; gap: 2rem !important; padding: 3.5rem 1.5rem !important; }
           #hero-text { align-items: center; }
-          #hero-avatar { width: 100px !important; height: 100px !important; }
+          #hero-avatar { width: 140px !important; height: 140px !important; }
           .hero-links { justify-content: center !important; gap: 6px !important; }
           .hero-link { padding: 6px 12px !important; font-size: 11.5px !important; }
           main { padding: 2rem 1.25rem !important; }
@@ -317,7 +317,7 @@ export default function Portfolio() {
           .stats-grid { grid-template-columns: 1fr !important; }
           #header-nav { gap: 0 !important; }
           h1 { font-size: 2.1rem !important; }
-          #hero-avatar { width: 90px !important; height: 90px !important; }
+          #hero-avatar { width: 120px !important; height: 120px !important; }
         }
       `}</style>
 
@@ -395,7 +395,7 @@ export default function Portfolio() {
 
         <div id="hero-container" style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", gap: "3rem", position: "relative", zIndex: 1, flexWrap: "nowrap" }}>
           <div id="hero-avatar" style={{
-            width: 120, height: 120, borderRadius: 16,
+            width: 150, height: 150, borderRadius: 16,
             background: "rgba(13,158,114,0.12)",
             border: `2px solid rgba(13,158,114,0.30)`,
             display: "flex", alignItems: "center", justifyContent: "center",
@@ -697,7 +697,7 @@ export default function Portfolio() {
 
         {/* ─── CONFERENCES ─── */}
         <SecHead id="conferences">Conferences</SecHead>
-        <div style={{ position: "relative", paddingLeft: 32,marginBottom:20 }}>
+        <div style={{ position: "relative", paddingLeft: 32, marginBottom: 20 }}>
           <div style={{ position: "absolute", left: 9, top: 10, bottom: 10, width: 2, background: `linear-gradient(180deg,${C.amber},${C.teal}30)`, borderRadius: 2 }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {conferences.map((c, i) => {
@@ -729,7 +729,7 @@ export default function Portfolio() {
           </div>
         </div>
 
-    
+
 
         {/* ─── EXPERIENCE ─── */}
         <SecHead id="experience">Professional Experience</SecHead>
@@ -841,7 +841,7 @@ export default function Portfolio() {
           {editMode && <button onClick={() => setTrainings([...trainings, { title: "New Training", period: "Period" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 8, padding: "12px", fontSize: 13, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" as const, width: "100%", marginTop: 14 }}>+ Add Training</button>}
         </div>
 
-        <div id="contact" style={{ 
+        <div id="contact" style={{
           background: C.heroGrad, borderRadius: 16, padding: "5rem 2rem", marginTop: 40,
           textAlign: "center", position: "relative", overflow: "hidden",
           border: `1px solid ${C.border}`,
@@ -849,7 +849,7 @@ export default function Portfolio() {
         }}>
           <div style={{ position: "absolute", top: -100, left: -100, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle,${C.teal}15,transparent 70%)` }} />
           <div style={{ position: "absolute", bottom: -100, right: -100, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle,${C.amber}15,transparent 70%)` }} />
-          
+
           <div style={{ position: "relative", zIndex: 1, maxWidth: 650, margin: "0 auto", textAlign: "left" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <h2 style={{ fontSize: "clamp(1.75rem,5vw,2.5rem)", fontWeight: 900, color: C.navy, marginBottom: 16, letterSpacing: "-0.01em" }}>Get In Touch</h2>
@@ -865,7 +865,7 @@ export default function Portfolio() {
             }} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
               <div style={{ gridColumn: "span 1" }}>
                 <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Name</label>
-                <input type="text" required placeholder="Your Name" value={formData.name} name="name" onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+                <input type="text" required placeholder="Your Name" value={formData.name} name="name" onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
               </div>
               <div style={{ gridColumn: "span 1" }}>
