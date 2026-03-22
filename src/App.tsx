@@ -61,7 +61,7 @@ const C: Record<string, string> = {
   cardGrad: "linear-gradient(135deg,#f4faf7,#ffffff)",
 };
 
-const NAV = ["About", "Education", "Research", "Publications", "Conferences", "Experience", "Skills"];
+const NAV = ["About", "Education", "Research", "Publications", "Conferences", "Experience", "Skills", "Contact"];
 
 /* ─── initial data ─── */
 const INIT_PERSON = {
@@ -205,12 +205,11 @@ function EditableText({ value, onChange, tag: Tag = "span", style, editMode, mul
 }
 
 /* ─── section heading ─── */
-function SecHead({ children, id }: { children: ReactNode; id: string }) {
+function SecHead({ children, id }: { children: string; id: string }) {
   return (
-    <div id={id} style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 30, scrollMarginTop: 80 }}>
-      <div style={{ width: 3, height: 30, background: `linear-gradient(180deg,${C.amber},${C.teal})`, borderRadius: 2, flexShrink: 0 }} />
-      <h2 style={{ fontFamily: "'Roboto', sans-serif", fontSize: 22, fontWeight: 800, color: C.navy, margin: 0, letterSpacing: "-0.01em" }}>{children}</h2>
-      <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${C.border},transparent)` }} />
+    <div className="sec-head" id={id} style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 28, marginTop: 10 }}>
+      <h2 style={{ fontSize: "clamp(1.25rem,4vw,1.6rem)", fontWeight: 900, color: C.navy, margin: 0, textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>{children}</h2>
+      <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${C.teal}40,transparent)` }} />
     </div>
   );
 }
@@ -226,6 +225,7 @@ function Tag({ children, color = C.teal, bg = C.tealDim }: { children: ReactNode
 export default function Portfolio() {
   const [active, setActive] = useState("about");
   const [editMode, setEditMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [person, setPerson] = useState(INIT_PERSON);
   const [publications, setPublications] = useState(INIT_PUBLICATIONS);
@@ -240,6 +240,7 @@ export default function Portfolio() {
   const [trainings, setTrainings] = useState(INIT_TRAININGS);
   const [education, setEducation] = useState(INIT_EDUCATION);
   const [tests, setTests] = useState(INIT_TESTS);
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -273,16 +274,60 @@ export default function Portfolio() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         a:hover { opacity: 0.82; }
-        button { font-family: 'Roboto', sans-serif; } * { font-family: 'Roboto', sans-serif; }
+        button { font-family: 'Roboto', sans-serif; cursor: pointer; } * { font-family: 'Roboto', sans-serif; }
+        
+        /* Responsive scrollbar for nav */
+        #header-nav::-webkit-scrollbar { display: none; }
+        #header-nav { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @media (max-width: 768px) {
+          header { padding: 0 1.25rem !important; height: 62px !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; }
+          #header-nav { 
+            position: fixed; top: 62px; left: 0; width: 100%; 
+            background: rgba(247,244,239,0.98); 
+            flex-direction: column !important; 
+            padding: 1.5rem !important; 
+            gap: 0.75rem !important;
+            border-bottom: 1px solid ${C.border};
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            transform: translateY(${menuOpen ? "0" : "-120%"});
+            opacity: ${menuOpen ? "1" : "0"};
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: ${menuOpen ? "all" : "none"};
+            z-index: 299;
+          }
+          #menu-toggle { display: flex !important; }
+          #hero-container { flex-direction: column; text-align: center; gap: 2rem !important; padding: 3.5rem 1.5rem !important; }
+          #hero-text { align-items: center; }
+          #hero-avatar { width: 100px !important; height: 100px !important; }
+          .hero-links { justify-content: center !important; gap: 6px !important; }
+          .hero-link { padding: 6px 12px !important; font-size: 11.5px !important; }
+          main { padding: 2rem 1.25rem !important; }
+          .stats-grid { grid-template-columns: 1fr 1fr !important; }
+          .sec-head { flex-direction: column; align-items: flex-start !important; gap: 10px !important; }
+          .publication-tabs { width: 100% !important; flex-wrap: wrap !important; }
+          .publication-tabs button { flex: 1; text-align: center; }
+          .card-inner { padding: 16px !important; }
+          #contact-form { grid-template-columns: 1fr !important; }
+          #contact-form > div { grid-column: span 1 !important; }
+        }
+        @media (max-width: 480px) {
+          .stats-grid { grid-template-columns: 1fr !important; }
+          #header-nav { gap: 0 !important; }
+          h1 { font-size: 2.1rem !important; }
+          #hero-avatar { width: 90px !important; height: 90px !important; }
+        }
       `}</style>
 
       {/* ═══ TOP BAR ═══ */}
       <header style={{
         position: "sticky", top: 0, zIndex: 300,
         background: "rgba(247,244,239,0.88)", backdropFilter: "blur(20px) saturate(160%)",
-        borderBottom: `1px solid ${C.border}`, height: 62,
+        borderBottom: `1px solid ${C.border}`,
         display: "flex", alignItems: "center", padding: "0 2.5rem", justifyContent: "space-between", gap: "1rem",
+        minHeight: 62
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
           <div style={{
@@ -297,17 +342,34 @@ export default function Portfolio() {
             <div style={{ fontSize: 10.5, color: C.muted, lineHeight: 1, fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}>Agricultural Economist</div>
           </div>
         </div>
-        <div style={{ display: "flex", gap: 2, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+
+        {/* Mobile menu toggle */}
+        <button id="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} style={{
+          display: "none", alignItems: "center", justifyContent: "center",
+          width: 40, height: 40, borderRadius: 8, border: `1.5px solid ${C.border}`,
+          background: menuOpen ? C.navy : "white", color: menuOpen ? C.amber : C.navy,
+          cursor: "pointer", transition: "all 0.2s"
+        }}>
+          {menuOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          )}
+        </button>
+
+        <div id="header-nav" style={{ display: "flex", gap: 2, alignItems: "center", flexWrap: "nowrap", justifyContent: "flex-end" }}>
           {NAV.map(n => (
-            <button key={n} onClick={() => scrollTo(n.toLowerCase())} style={{
+            <button key={n} onClick={() => { scrollTo(n.toLowerCase()); setMenuOpen(false); }} style={{
               padding: "6px 14px", borderRadius: 6, fontSize: 12.5, border: "none", cursor: "pointer",
               background: active === n.toLowerCase() ? C.navy : "transparent",
               color: active === n.toLowerCase() ? C.amber : C.muted,
               fontWeight: active === n.toLowerCase() ? 600 : 400,
               transition: "all 0.18s",
+              width: "auto",
+              textAlign: "center"
             }}>{n}</button>
           ))}
-          <button onClick={() => setEditMode(!editMode)} style={{
+          <button onClick={() => { setEditMode(!editMode); setMenuOpen(false); }} style={{
             marginLeft: 10, padding: "7px 16px", borderRadius: 6, fontSize: 12.5, fontWeight: 600, cursor: "pointer",
             border: editMode ? `1.5px solid ${C.amber}` : `1.5px solid ${C.border}`,
             background: editMode ? C.amberDim : "transparent",
@@ -331,8 +393,8 @@ export default function Portfolio() {
         <div style={{ position: "absolute", left: "35%", bottom: -120, width: 360, height: 360, borderRadius: "50%", background: `radial-gradient(circle,rgba(13,158,114,0.12),transparent 70%)`, pointerEvents: "none" }} />
         <div style={{ position: "absolute", left: -80, top: "20%", width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle,rgba(13,158,114,0.08),transparent 70%)`, pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", gap: "3rem", position: "relative", zIndex: 1, flexWrap: "wrap" }}>
-          <div style={{
+        <div id="hero-container" style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", gap: "3rem", position: "relative", zIndex: 1, flexWrap: "nowrap" }}>
+          <div id="hero-avatar" style={{
             width: 120, height: 120, borderRadius: 16,
             background: "rgba(13,158,114,0.12)",
             border: `2px solid rgba(13,158,114,0.30)`,
@@ -357,7 +419,7 @@ export default function Portfolio() {
             )}
           </div>
 
-          <div style={{ flex: 1, minWidth: 260 }}>
+          <div id="hero-text" style={{ flex: 1, minWidth: 260 }}>
             {/* Name */}
             <EditableText editMode={editMode} value={person.name} onChange={v => updatePerson("name", v)}
               tag="h1" style={{
@@ -375,15 +437,16 @@ export default function Portfolio() {
             }} tag="div" style={{ fontSize: 12.5, color: C.ink2, marginBottom: 24, letterSpacing: "0.02em" }} />
 
             {/* Links */}
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <a href={`mailto:${person.email}`} style={{
+            <div className="hero-links" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <a href={`mailto:${person.email}`} className="hero-link" style={{
                 padding: "8px 18px", borderRadius: 6,
-                border: `1px solid ${C.amber}50`,
+                border: `1px solid ${C.amber}40`,
                 color: C.navy, fontSize: 12.5, textDecoration: "none",
-                background: "rgba(13,158,114,0.12)", fontWeight: 600, letterSpacing: "0.01em",
+                background: "rgba(200,133,26,0.08)", fontWeight: 600, letterSpacing: "0.01em",
+                transition: "all 0.2s",
               }}>{person.email}</a>
               {person.links.map(l => (
-                <a key={l.label} href={l.url} target="_blank" rel="noreferrer" style={{
+                <a key={l.label} href={l.url} target="_blank" rel="noreferrer" className="hero-link" style={{
                   padding: "8px 18px", borderRadius: 6,
                   border: `1px solid ${C.border}`,
                   color: C.ink2, fontSize: 12.5, textDecoration: "none",
@@ -402,7 +465,7 @@ export default function Portfolio() {
         <SecHead id="about">About</SecHead>
 
         {/* Stats row */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: 12, marginBottom: 30 }}>
+        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: 12, marginBottom: 30 }}>
           {[
             [String(publications.length), "Publications", C.teal, C.tealDim],
             [String(underReview.length), "Under Review", C.terra, C.terraDim],
@@ -488,19 +551,19 @@ export default function Portfolio() {
 
         <SecHead id="publications">Publications</SecHead>
         <div style={{ marginBottom: 26 }}>
-          <div style={{ display: "flex", gap: 3, marginBottom: 26, background: C.borderLight, padding: 5, borderRadius: 10, width: "fit-content" }}>
+          <div className="publication-tabs" style={{ display: "flex", gap: 3, marginBottom: 26, background: C.borderLight, padding: 5, borderRadius: 10, width: "fit-content" }}>
             {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "Working Papers", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
               <button key={k} onClick={() => setPubTab(k)} style={{
-                padding: "8px 16px", borderRadius: 7, fontSize: 12.5, cursor: "pointer", border: "none",
-                background: pubTab === k ? C.surfaceCard : "transparent",
+                flex: 1,
+                padding: "8px 18px", borderRadius: 8, fontSize: 13, border: "none", cursor: "pointer",
+                background: pubTab === k ? "white" : "transparent",
                 color: pubTab === k ? col : C.muted,
-                fontWeight: pubTab === k ? 700 : 400,
-                boxShadow: pubTab === k ? "0 2px 8px rgba(13,27,42,0.08)" : "none",
+                fontWeight: pubTab === k ? 700 : 500,
+                boxShadow: pubTab === k ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
                 transition: "all 0.2s",
-                display: "flex", alignItems: "center", gap: 6,
+                display: "flex", alignItems: "center", gap: 8, justifyContent: "center"
               }}>
-                {v}
-                <span style={{ background: pubTab === k ? col + "18" : "transparent", color: pubTab === k ? col : C.muted, padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 700 }}>{count}</span>
+                {v} <span style={{ fontSize: 11, background: pubTab === k ? col : C.border, color: pubTab === k ? "white" : C.muted, padding: "1px 6px", borderRadius: 6, transition: "all 0.2s" }}>{count}</span>
               </button>
             ))}
           </div>
@@ -629,14 +692,12 @@ export default function Portfolio() {
           </div>
         ))}
 
-        <Hr />
-
 
         <Hr />
 
         {/* ─── CONFERENCES ─── */}
         <SecHead id="conferences">Conferences</SecHead>
-        <div style={{ position: "relative", paddingLeft: 32 }}>
+        <div style={{ position: "relative", paddingLeft: 32,marginBottom:20 }}>
           <div style={{ position: "absolute", left: 9, top: 10, bottom: 10, width: 2, background: `linear-gradient(180deg,${C.amber},${C.teal}30)`, borderRadius: 2 }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {conferences.map((c, i) => {
@@ -668,7 +729,7 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <Hr />
+    
 
         {/* ─── EXPERIENCE ─── */}
         <SecHead id="experience">Professional Experience</SecHead>
@@ -678,12 +739,12 @@ export default function Portfolio() {
             <div style={{ background: C.navy3, color: 'white', padding: "22px 26px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
               <div>
                 <EditableText editMode={editMode} value={exp.role} onChange={v => { const ne = [...experience]; ne[i] = { ...ne[i], role: v }; setExperience(ne); }}
-                  tag="div" style={{ fontSize: 17, fontWeight: 800, color: C.navy, fontFamily: "'Roboto', sans-serif" }} />
-                <div style={{ fontSize: 13, color: "rgba(200,240,220,0.60)", marginTop: 4 }}>{exp.org} · {exp.location}</div>
+                  tag="div" style={{ fontSize: 17, fontWeight: 800, color: "white", fontFamily: "'Roboto', sans-serif" }} />
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", marginTop: 4, fontWeight: 500 }}>{exp.org} · {exp.location}</div>
               </div>
               <span style={{ fontSize: 12, background: "rgba(13,158,114,0.14)", color: C.amber, padding: "5px 14px", borderRadius: 6, border: `1px solid ${C.amber}30`, whiteSpace: "nowrap", fontWeight: 600 }}>{exp.period}</span>
             </div>
-            <div style={{ padding: "20px 26px" }}>
+            <div className="card-inner" style={{ padding: "24px" }}>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px" }}>
                 {exp.bullets.map((b, j) => (
                   <li key={j} style={{ display: "flex", gap: 10, fontSize: 14, color: C.ink2, marginBottom: 9, lineHeight: 1.7, alignItems: "flex-start" }}>
@@ -732,7 +793,7 @@ export default function Portfolio() {
 
         {/* ─── SKILLS ─── */}
         <SecHead id="skills">Skills & Training</SecHead>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 16 }}>
           <div style={{ ...cardStyle, borderTop: `3px solid ${C.navy}` }}>
             <div style={{ fontSize: 10, color: C.navy, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16, fontWeight: 700 }}>Statistical Software</div>
             {skills.map((s, i) => (
@@ -778,6 +839,62 @@ export default function Portfolio() {
             </div>
           ))}
           {editMode && <button onClick={() => setTrainings([...trainings, { title: "New Training", period: "Period" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 8, padding: "12px", fontSize: 13, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" as const, width: "100%", marginTop: 14 }}>+ Add Training</button>}
+        </div>
+
+        <div id="contact" style={{ 
+          background: C.heroGrad, borderRadius: 16, padding: "5rem 2rem", marginTop: 40,
+          textAlign: "center", position: "relative", overflow: "hidden",
+          border: `1px solid ${C.border}`,
+          boxShadow: "0 10px 30px -10px rgba(0,0,0,0.05)"
+        }}>
+          <div style={{ position: "absolute", top: -100, left: -100, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle,${C.teal}15,transparent 70%)` }} />
+          <div style={{ position: "absolute", bottom: -100, right: -100, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle,${C.amber}15,transparent 70%)` }} />
+          
+          <div style={{ position: "relative", zIndex: 1, maxWidth: 650, margin: "0 auto", textAlign: "left" }}>
+            <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <h2 style={{ fontSize: "clamp(1.75rem,5vw,2.5rem)", fontWeight: 900, color: C.navy, marginBottom: 16, letterSpacing: "-0.01em" }}>Get In Touch</h2>
+              <p style={{ fontSize: 16, color: C.ink2, opacity: 0.9, lineHeight: 1.6 }}>
+                Have a question or want to collaborate? Send me a message below.
+              </p>
+            </div>
+
+            <form id="contact-form" onSubmit={(e) => {
+              e.preventDefault();
+              const mailtoUrl = `mailto:${person.email}?subject=${encodeURIComponent(formData.subject || "Contact from Portfolio")}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
+              window.location.href = mailtoUrl;
+            }} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+              <div style={{ gridColumn: "span 1" }}>
+                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Name</label>
+                <input type="text" required placeholder="Your Name" value={formData.name} name="name" onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+              </div>
+              <div style={{ gridColumn: "span 1" }}>
+                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Email</label>
+                <input type="email" required placeholder="Your Email" value={formData.email} name="email" onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+              </div>
+              <div style={{ gridColumn: "span 2" }}>
+                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Subject</label>
+                <input type="text" placeholder="Subject" value={formData.subject} name="subject" onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+              </div>
+              <div style={{ gridColumn: "span 2" }}>
+                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Message</label>
+                <textarea required placeholder="Your Message" rows={5} value={formData.message} name="message" onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", resize: "vertical", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+              </div>
+              <div style={{ gridColumn: "span 2", textAlign: "center", marginTop: 10 }}>
+                <button type="submit" style={{
+                  background: C.navy, color: "white", padding: "16px 48px", borderRadius: 12,
+                  fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer",
+                  boxShadow: `0 10px 20px -5px ${C.navy}40`,
+                  transition: "all 0.3s"
+                }}>
+                  Send Message 🚀
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
 
