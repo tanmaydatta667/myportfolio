@@ -12,6 +12,7 @@ interface Conference { type: string; event: string; location: string; date: stri
 interface ExperienceItem { role: string; org: string; location: string; period: string; bullets: string[]; award: string; }
 interface LeadershipItem { role: string; org: string; period: string; icon: string; }
 interface Training { title: string; period: string; }
+interface Workshop { title: string; description: string; organizer: string; date: string; mode: string; }
 interface EducationItem { degree: string; school: string; location: string; year: string; }
 interface TestItem { name: string; score: string; }
 
@@ -108,8 +109,8 @@ const INIT_RESEARCH: ResearchBlock[] = [
     role: "Research Associate", color: C.teal,
     dept: "Dept. of Agricultural Statistics, Faculty of Agribusiness Management, SAU",
     projects: [
-      { period: "Sep–Nov 2024", title: "2024 Bangladesh Shrimp Survey", funder: "ADB Institute / University of Tokyo", bullets: ["Primary data collection from shrimp-farming households and stakeholders", "Structured data entry and dataset cleaning for subsequent analysis", "Fieldwork coordination under Prof. Dr. Md. Mizanur Rahman Sarker"] },
       { period: "Jul 2024–Jan 2025", title: "Impact of CSA Technologies on Food Security in Haor Area, Sunamganj", funder: "SAURES", bullets: ["Farm-level data collection on CSA technologies and household food security", "Research report writing and final project documentation"] },
+      { period: "Sep–Nov 2024", title: "2024 Bangladesh Shrimp Survey", funder: "ADB Institute / University of Tokyo", bullets: ["Primary data collection from shrimp-farming households and stakeholders", "Structured data entry and dataset cleaning for subsequent analysis", "Fieldwork coordination under Prof. Dr. Md. Mizanur Rahman Sarker"] },
       { period: "Jan–Jun 2023", title: "Validation and Adoption of CSTs for Shrimp Farming in Coastal Ecosystems", funder: "Ministry of Science & Technology, Bangladesh", bullets: ["Field implementation and data collection in coastal shrimp-farming areas", "Prepared summary documents for ministry submission"] },
     ],
   },
@@ -127,8 +128,8 @@ const INIT_RESEARCH: ResearchBlock[] = [
 
 const INIT_CONFERENCES: Conference[] = [
   { type: "Oral Presentation", event: "CUKUROVA 16th International Scientific Research Conference", location: "Adana, Türkiye (Online)", date: "Nov 2025", note: "Household food security & climate change adaptation in haor and riverbank areas of Bangladesh" },
-  { type: "Poster Presentation", event: "7th International Scientific Conference on Food Safety and Health (ISCFSH)", location: "Bangladesh", date: "May 2025", note: "Organised by Bangladesh Society for Safe Food (BSSF)" },
   { type: "Abstract Accepted", event: "6th International Conference on Agriculture, Food Security and Safety 2025 (Hybrid)", location: "Kuala Lumpur, Malaysia", date: "Aug 2025", note: "" },
+  { type: "Poster Presentation", event: "7th International Scientific Conference on Food Safety and Health (ISCFSH)", location: "Bangladesh", date: "May 2025", note: "Organised by Bangladesh Society for Safe Food (BSSF)" },
   { type: "Abstract Accepted", event: "International Conference on Smart Agriculture, Environment and Global Warming (SAEGW-2025)", location: "Daegu, South Korea (Hybrid)", date: "May 2025", note: "International Society for Research (ISR)" },
 ];
 
@@ -155,6 +156,10 @@ const INIT_TRAININGS: Training[] = [
   { title: "Agri-Science Leadership Development Training (Virtual)", period: "Nov–Dec 2020" },
   { title: "SPSS Training for Agricultural Experiments and Research", period: "Nov 2024 – Jan 2025" },
   { title: "Training on Data Analysis (R and SPSS)", period: "May 7–8, 2025" },
+];
+
+const INIT_WORKSHOPS: Workshop[] = [
+  { title: "Turning SDGs into Local Action: Lessons from University-Led Climate and Planetary Health Initiatives", description: "Pre-conference workshop exploring sustainable development goals and their local implementation through university-led climate and planetary health initiatives.", organizer: "International Conference on Sustainable Development Goals (ICSDG 2026)", date: "Feb 26, 2026", mode: "Online" },
 ];
 
 const INIT_EDUCATION: EducationItem[] = [
@@ -208,8 +213,8 @@ function EditableText({ value, onChange, tag: Tag = "span", style, editMode, mul
 function SecHead({ children, id }: { children: string; id: string }) {
   return (
     <div className="sec-head" id={id} style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 28, marginTop: 10 }}>
-      <h2 style={{ fontSize: "clamp(1.25rem,4vw,1.6rem)", fontWeight: 900, color: C.navy, margin: 0, textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>{children}</h2>
-      <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${C.teal}40,transparent)` }} />
+      <h2 style={{ fontSize: "clamp(1.3rem,4vw,1.75rem)", fontWeight: 800, color: C.navy, margin: 0, textTransform: "uppercase", letterSpacing: "0.08em", whiteSpace: "nowrap" }}>{children}</h2>
+      <div style={{ flex: 1, height: 2, background: `linear-gradient(90deg,${C.teal},${C.teal}20,transparent)` }} />
     </div>
   );
 }
@@ -218,7 +223,7 @@ function Hr() { return <div style={{ height: 1, background: `linear-gradient(90d
 
 /* ─── tag ─── */
 function Tag({ children, color = C.teal, bg = C.tealDim }: { children: ReactNode; color?: string; bg?: string }) {
-  return <span style={{ display: "inline-block", padding: "4px 13px", borderRadius: 4, fontSize: 12, fontWeight: 600, color, background: bg, margin: "3px 3px 3px 0", fontFamily: "'Roboto', sans-serif", letterSpacing: "0.02em", border: `1px solid ${color}25` }}>{children}</span>;
+  return <span style={{ display: "inline-block", padding: "5px 14px", borderRadius: 6, fontSize: 12, fontWeight: 700, color, background: bg, margin: "4px 4px 4px 0", fontFamily: "'Roboto', sans-serif", letterSpacing: "0.03em", border: `1.5px solid ${color}30` }}>{children}</span>;
 }
 
 /* ═══════════════════════════════════════════ */
@@ -238,6 +243,7 @@ export default function Portfolio() {
   const [skills, setSkills] = useState(INIT_SKILLS);
   const [competencies, setCompetencies] = useState(INIT_COMPETENCIES);
   const [trainings, setTrainings] = useState(INIT_TRAININGS);
+  const [workshops, setWorkshops] = useState(INIT_WORKSHOPS);
   const [education, setEducation] = useState(INIT_EDUCATION);
   const [tests, setTests] = useState(INIT_TESTS);
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
@@ -264,7 +270,7 @@ export default function Portfolio() {
     borderRadius: 12,
     padding: "22px 26px",
     transition: "all 0.25s ease",
-    boxShadow: "0 1px 2px rgba(13,27,42,0.04), 0 4px 16px rgba(13,27,42,0.06)",
+    boxShadow: "0 2px 8px rgba(14,61,47,0.08), 0 8px 24px rgba(14,61,47,0.12)",
   };
 
   return (
@@ -272,7 +278,7 @@ export default function Portfolio() {
 
       {/* Google Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap');
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         a:hover { opacity: 0.82; }
@@ -334,12 +340,12 @@ export default function Portfolio() {
             width: 36, height: 36, borderRadius: 8,
             background: C.navy,
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontWeight: 700, fontSize: 13, color: C.amber, flexShrink: 0,
-            fontFamily: "'Roboto', sans-serif", letterSpacing: "0.03em",
+            fontWeight: 800, fontSize: 13, color: C.amber, flexShrink: 0,
+            fontFamily: "'Roboto', sans-serif", letterSpacing: "0.04em",
           }}>TD</div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: C.navy, lineHeight: 1.2, fontFamily: "'Roboto', sans-serif" }}>Tanmay Datta</div>
-            <div style={{ fontSize: 10.5, color: C.muted, lineHeight: 1, fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}>Agricultural Economist</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: C.navy, lineHeight: 1.2, fontFamily: "'Roboto', sans-serif" }}>Tanmay Datta</div>
+            <div style={{ fontSize: 11, color: C.muted, lineHeight: 1, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>Agricultural Economist</div>
           </div>
         </div>
 
@@ -360,17 +366,17 @@ export default function Portfolio() {
         <div id="header-nav" style={{ display: "flex", gap: 2, alignItems: "center", flexWrap: "nowrap", justifyContent: "flex-end" }}>
           {NAV.map(n => (
             <button key={n} onClick={() => { scrollTo(n.toLowerCase()); setMenuOpen(false); }} style={{
-              padding: "6px 14px", borderRadius: 6, fontSize: 12.5, border: "none", cursor: "pointer",
+              padding: "7px 16px", borderRadius: 7, fontSize: 13, border: "none", cursor: "pointer",
               background: active === n.toLowerCase() ? C.navy : "transparent",
               color: active === n.toLowerCase() ? C.amber : C.muted,
-              fontWeight: active === n.toLowerCase() ? 600 : 400,
+              fontWeight: active === n.toLowerCase() ? 700 : 500,
               transition: "all 0.18s",
               width: "auto",
-              textAlign: "center"
+              textAlign: "center", letterSpacing: "0.01em"
             }}>{n}</button>
           ))}
           <button onClick={() => { setEditMode(!editMode); setMenuOpen(false); }} style={{
-            marginLeft: 10, padding: "7px 16px", borderRadius: 6, fontSize: 12.5, fontWeight: 600, cursor: "pointer",
+            marginLeft: 12, padding: "8px 18px", borderRadius: 7, fontSize: 13, fontWeight: 700, cursor: "pointer",
             border: editMode ? `1.5px solid ${C.amber}` : `1.5px solid ${C.border}`,
             background: editMode ? C.amberDim : "transparent",
             color: editMode ? C.amber : C.muted,
@@ -424,33 +430,33 @@ export default function Portfolio() {
             <EditableText editMode={editMode} value={person.name} onChange={v => updatePerson("name", v)}
               tag="h1" style={{
                 fontFamily: "'Roboto', sans-serif",
-                fontSize: "clamp(2rem,4.5vw,2.75rem)",
-                fontWeight: 900, color: C.navy, margin: "0 0 8px",
-                letterSpacing: "-0.02em", display: "block", lineHeight: 1.15,
+                fontSize: "clamp(2.2rem,5vw,3rem)",
+                fontWeight: 900, color: C.navy, margin: "0 0 10px",
+                letterSpacing: "-0.03em", display: "block", lineHeight: 1.1,
               }} />
             {/* Title */}
             <EditableText editMode={editMode} value={`${person.title} · Development Researcher`} onChange={v => updatePerson("title", v.split(" · ")[0])}
-              tag="div" style={{ fontSize: 15, color: C.teal, fontWeight: 500, marginBottom: 5, fontFamily: "'Roboto', sans-serif" }} />
+              tag="div" style={{ fontSize: 16, color: C.teal, fontWeight: 700, marginBottom: 6, fontFamily: "'Roboto', sans-serif", letterSpacing: "0.01em" }} />
             {/* Institution */}
             <EditableText editMode={editMode} value={`${person.institution}, ${person.location}`} onChange={v => {
               const parts = v.split(","); updatePerson("institution", parts[0]?.trim() || ""); updatePerson("location", parts.slice(1).join(",").trim() || "");
-            }} tag="div" style={{ fontSize: 12.5, color: C.ink2, marginBottom: 24, letterSpacing: "0.02em" }} />
+            }} tag="div" style={{ fontSize: 13, color: C.ink2, marginBottom: 26, letterSpacing: "0.02em", fontWeight: 500 }} />
 
             {/* Links */}
-            <div className="hero-links" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <div className="hero-links" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <a href={`mailto:${person.email}`} className="hero-link" style={{
-                padding: "8px 18px", borderRadius: 6,
-                border: `1px solid ${C.amber}40`,
-                color: C.navy, fontSize: 12.5, textDecoration: "none",
-                background: "rgba(200,133,26,0.08)", fontWeight: 600, letterSpacing: "0.01em",
+                padding: "9px 20px", borderRadius: 8,
+                border: `1.5px solid ${C.amber}60`,
+                color: C.navy, fontSize: 13, textDecoration: "none",
+                background: C.amberDim, fontWeight: 700, letterSpacing: "0.02em",
                 transition: "all 0.2s",
               }}>{person.email}</a>
               {person.links.map(l => (
                 <a key={l.label} href={l.url} target="_blank" rel="noreferrer" className="hero-link" style={{
-                  padding: "8px 18px", borderRadius: 6,
-                  border: `1px solid ${C.border}`,
-                  color: C.ink2, fontSize: 12.5, textDecoration: "none",
-                  background: "rgba(255,255,255,0.60)", transition: "all 0.2s",
+                  padding: "9px 20px", borderRadius: 8,
+                  border: `1.5px solid ${C.border}`,
+                  color: C.ink2, fontSize: 13, textDecoration: "none",
+                  background: C.surfaceCard, fontWeight: 600, transition: "all 0.2s", letterSpacing: "0.01em",
                 }}>{l.label}</a>
               ))}
             </div>
@@ -465,36 +471,36 @@ export default function Portfolio() {
         <SecHead id="about">About</SecHead>
 
         {/* Stats row */}
-        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: 12, marginBottom: 30 }}>
+        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))", gap: 16, marginBottom: 36 }}>
           {[
             [String(publications.length), "Publications", C.teal, C.tealDim],
             [String(underReview.length), "Under Review", C.terra, C.terraDim],
             [String(workingPapers.length), "Working Papers", C.amber, C.amberDim],
             [String(conferences.length), "Conferences", C.navy, "rgba(13,27,42,0.07)"],
           ].map(([n, l, col, bg]) => (
-            <div key={l} style={{ background: bg, border: `1px solid ${col}25`, borderRadius: 12, textAlign: "center", padding: "20px 14px" }}>
-              <div style={{ fontSize: 34, fontWeight: 900, color: col, lineHeight: 1, fontFamily: "'Roboto', sans-serif" }}>{n}</div>
-              <div style={{ fontSize: 10.5, color: C.muted, marginTop: 7, letterSpacing: "0.07em", textTransform: "uppercase", lineHeight: 1.3, fontWeight: 600 }}>{l}</div>
+            <div key={l} style={{ background: bg, border: `1.5px solid ${col}35`, borderRadius: 14, textAlign: "center", padding: "24px 16px", transition: "all 0.2s" }}>
+              <div style={{ fontSize: 38, fontWeight: 900, color: col, lineHeight: 1, fontFamily: "'Roboto', sans-serif" }}>{n}</div>
+              <div style={{ fontSize: 11, color: C.muted, marginTop: 10, letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1.3, fontWeight: 700 }}>{l}</div>
             </div>
           ))}
         </div>
 
         {/* About paragraph */}
         <EditableText editMode={editMode} value={person.about} onChange={v => updatePerson("about", v)} multiline
-          tag="p" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15.5, lineHeight: 1.9, color: C.ink, margin: "0 0 26px", display: "block", fontWeight: 400 }} />
+          tag="p" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 16, lineHeight: 2, color: C.ink, margin: "0 0 28px", display: "block", fontWeight: 500 }} />
 
         {/* Research interests */}
-        <div style={{ marginBottom: 26 }}>
-          <div style={{ fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 12, fontWeight: 700 }}>Research Interests</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 14, fontWeight: 800 }}>Research Interests</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
             {person.interests.map((t, i) => (
-              <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 {editMode ? (
                   <input value={t} onChange={e => { const ni = [...person.interests]; ni[i] = e.target.value; updatePerson("interests", ni); }}
-                    style={{ background: C.tealDim, border: `1px solid ${C.teal}50`, borderRadius: 4, padding: "4px 12px", fontSize: 12, fontWeight: 600, color: C.teal, outline: "none", fontFamily: "'Roboto', sans-serif", width: Math.max(80, t.length * 8) }}
+                    style={{ background: C.tealDim, border: `1.5px solid ${C.teal}60`, borderRadius: 6, padding: "6px 14px", fontSize: 13, fontWeight: 700, color: C.teal, outline: "none", fontFamily: "'Roboto', sans-serif", width: Math.max(100, t.length * 8) }}
                   />
                 ) : <Tag>{t}</Tag>}
-                {editMode && <button onClick={() => updatePerson("interests", person.interests.filter((_: string, j: number) => j !== i))} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 14, padding: 0, lineHeight: 1 }}>×</button>}
+                {editMode && <button onClick={() => updatePerson("interests", person.interests.filter((_: string, j: number) => j !== i))} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 16, padding: 0, lineHeight: 1, fontWeight: 700 }}>×</button>}
               </span>
             ))}
             {editMode && <button onClick={() => updatePerson("interests", [...person.interests, "New Interest"])} style={{ background: C.tealDim, border: `1px dashed ${C.teal}`, borderRadius: 4, padding: "4px 14px", fontSize: 12, color: C.teal, cursor: "pointer", fontWeight: 600 }}>+ Add</button>}
@@ -510,11 +516,11 @@ export default function Portfolio() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10 }}>
                 <div style={{ flex: 1, minWidth: 260 }}>
                   <EditableText editMode={editMode} value={edu.degree} onChange={v => { const ne = [...education]; ne[i].degree = v; setEducation(ne); }}
-                    tag="div" style={{ fontSize: 16, fontWeight: 700, color: C.navy, marginBottom: 4 }} />
+                    tag="div" style={{ fontSize: 17, fontWeight: 800, color: C.navy, marginBottom: 6 }} />
                   <EditableText editMode={editMode} value={edu.school} onChange={v => { const ne = [...education]; ne[i].school = v; setEducation(ne); }}
-                    tag="div" style={{ fontSize: 14, fontWeight: 600, color: C.teal, marginBottom: 2 }} />
+                    tag="div" style={{ fontSize: 15, fontWeight: 700, color: C.teal, marginBottom: 3 }} />
                   <EditableText editMode={editMode} value={edu.location} onChange={v => { const ne = [...education]; ne[i].location = v; setEducation(ne); }}
-                    tag="div" style={{ fontSize: 13, color: C.muted, marginBottom: 8 }} />
+                    tag="div" style={{ fontSize: 13, color: C.muted, marginBottom: 10, fontWeight: 500 }} />
                   <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                     <span style={{ fontSize: 13, color: C.muted }}>{edu.year}</span>
                   </div>
@@ -529,7 +535,7 @@ export default function Portfolio() {
         <div style={{ marginBottom: 34 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 3, height: 24, background: `linear-gradient(180deg,${C.amber},${C.teal})`, borderRadius: 2 }} />
-            <h3 style={{ fontSize: 18, fontWeight: 800, color: C.navy, margin: 0 }}>Standardized Test</h3>
+            <h3 style={{ fontSize: 19, fontWeight: 800, color: C.navy, margin: 0 }}>Standardized Test</h3>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 12 }}>
             {tests.map((t, i) => (
@@ -537,7 +543,7 @@ export default function Portfolio() {
                 {editMode && <button onClick={() => setTests(tests.filter((_, j) => j !== i))} style={{ position: "absolute", top: -8, right: -8, background: C.terra, color: "white", borderRadius: "50%", width: 20, height: 20, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>×</button>}
                 <div>
                   <EditableText editMode={editMode} value={t.name} onChange={v => { const nt = [...tests]; nt[i].name = v; setTests(nt); }}
-                    tag="div" style={{ fontSize: 14, fontWeight: 700, color: C.navy }} />
+                    tag="div" style={{ fontSize: 15, fontWeight: 800, color: C.navy }} />
                   {t.score && <EditableText editMode={editMode} value={t.score} onChange={v => { const nt = [...tests]; nt[i].score = v; setTests(nt); }}
                     tag="div" style={{ fontSize: 13, color: C.teal, marginTop: 2 }} />}
                 </div>
@@ -551,19 +557,19 @@ export default function Portfolio() {
 
         <SecHead id="publications">Publications</SecHead>
         <div style={{ marginBottom: 26 }}>
-          <div className="publication-tabs" style={{ display: "flex", gap: 3, marginBottom: 26, background: C.borderLight, padding: 5, borderRadius: 10, width: "fit-content" }}>
+          <div className="publication-tabs" style={{ display: "flex", gap: 4, marginBottom: 28, background: C.borderLight, padding: 6, borderRadius: 11, width: "fit-content" }}>
             {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "Working Papers", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
               <button key={k} onClick={() => setPubTab(k)} style={{
                 flex: 1,
-                padding: "8px 18px", borderRadius: 8, fontSize: 13, border: "none", cursor: "pointer",
+                padding: "10px 20px", borderRadius: 8, fontSize: 14, border: "none", cursor: "pointer",
                 background: pubTab === k ? "white" : "transparent",
                 color: pubTab === k ? col : C.muted,
-                fontWeight: pubTab === k ? 700 : 500,
-                boxShadow: pubTab === k ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
+                fontWeight: pubTab === k ? 800 : 600,
+                boxShadow: pubTab === k ? "0 3px 12px rgba(0,0,0,0.08)" : "none",
                 transition: "all 0.2s",
-                display: "flex", alignItems: "center", gap: 8, justifyContent: "center"
+                display: "flex", alignItems: "center", gap: 9, justifyContent: "center"
               }}>
-                {v} <span style={{ fontSize: 11, background: pubTab === k ? col : C.border, color: pubTab === k ? "white" : C.muted, padding: "1px 6px", borderRadius: 6, transition: "all 0.2s" }}>{count}</span>
+                {v} <span style={{ fontSize: 12, fontWeight: pubTab === k ? 700 : 600, background: pubTab === k ? col : C.border, color: pubTab === k ? "white" : C.muted, padding: "2px 8px", borderRadius: 6, transition: "all 0.2s" }}>{count}</span>
               </button>
             ))}
           </div>
@@ -576,15 +582,15 @@ export default function Portfolio() {
                   {/* Year badge */}
                   <div style={{ position: "absolute", top: 0, right: editMode ? 48 : 0, background: C.navy, color: C.amber, fontSize: 11, fontWeight: 800, padding: "5px 16px", borderRadius: "0 12px 0 10px", letterSpacing: "0.05em" }}>{p.year}</div>
                   <EditableText editMode={editMode} value={p.title} onChange={v => { const np = [...publications]; np[i] = { ...np[i], title: v }; setPublications(np); }}
-                    tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 15.5, fontWeight: 600, color: C.navy, lineHeight: 1.55, marginBottom: 8, paddingRight: 56 }} />
+                    tag="div" style={{ fontFamily: "'Roboto', sans-serif", fontSize: 16, fontWeight: 800, color: C.navy, lineHeight: 1.6, marginBottom: 10, paddingRight: 56 }} />
                   <EditableText editMode={editMode} value={p.authors} onChange={v => { const np = [...publications]; np[i] = { ...np[i], authors: v }; setPublications(np); }}
-                    tag="div" style={{ fontSize: 12.5, color: C.ink2, marginBottom: 14 }} />
+                    tag="div" style={{ fontSize: 13, color: C.ink2, marginBottom: 14, fontWeight: 500 }} />
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
                     <div>
-                      <span style={{ fontWeight: 700, color: C.teal, fontSize: 13 }}>{p.journal}</span>
-                      <span style={{ fontSize: 13, color: C.muted }}> — {p.details}</span>
+                      <span style={{ fontWeight: 800, color: C.teal, fontSize: 14 }}>{p.journal}</span>
+                      <span style={{ fontSize: 13.5, color: C.muted, fontWeight: 500 }}> — {p.details}</span>
                     </div>
-                    <a href={p.url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: C.amber, border: `1px solid ${C.amber}40`, padding: "6px 16px", borderRadius: 6, textDecoration: "none", fontWeight: 700, background: C.amberDim, whiteSpace: "nowrap" }}>View Article →</a>
+                    <a href={p.url} target="_blank" rel="noreferrer" style={{ fontSize: 13, color: C.amber, border: `1.5px solid ${C.amber}60`, padding: "8px 18px", borderRadius: 7, textDecoration: "none", fontWeight: 800, background: C.amberDim, whiteSpace: "nowrap" }}>View Article →</a>
                   </div>
                 </div>
               ))}
@@ -631,20 +637,20 @@ export default function Portfolio() {
         <SecHead id="research">Research Experience</SecHead>
         {research.map((block, bi) => (
           <div key={bi} style={{ marginBottom: 34 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16, paddingBottom: 14, borderBottom: `1px solid ${C.border}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 18, paddingBottom: 16, borderBottom: `1px solid ${C.border}` }}>
               <div style={{
-                width: 44, height: 44, borderRadius: 10,
+                width: 48, height: 48, borderRadius: 12,
                 background: bi === 0 ? C.navy : C.tealDim,
-                border: `1px solid ${bi === 0 ? "transparent" : C.teal + "40"}`,
-                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0,
+                border: `1.5px solid ${bi === 0 ? "transparent" : C.teal + "50"}`,
+                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0,
               }}>
                 {bi === 0 ? "🔬" : "📋"}
               </div>
               <div>
                 <EditableText editMode={editMode} value={block.role} onChange={v => { const nr = [...research]; nr[bi] = { ...nr[bi], role: v }; setResearch(nr); }}
-                  tag="div" style={{ fontSize: 17, fontWeight: 800, color: C.navy, fontFamily: "'Roboto', sans-serif" }} />
+                  tag="div" style={{ fontSize: 18, fontWeight: 800, color: C.navy, fontFamily: "'Roboto', sans-serif" }} />
                 <EditableText editMode={editMode} value={block.dept} onChange={v => { const nr = [...research]; nr[bi] = { ...nr[bi], dept: v }; setResearch(nr); }}
-                  tag="div" style={{ fontSize: 12, color: C.ink2, marginTop: 2 }} />
+                  tag="div" style={{ fontSize: 13, color: C.ink2, marginTop: 3, fontWeight: 500 }} />
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -659,10 +665,10 @@ export default function Portfolio() {
                       transition: "background 0.2s",
                     }}>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: C.navy, lineHeight: 1.5 }}>{proj.title}</div>
-                        <div style={{ fontSize: 12, color: C.ink2, marginTop: 5, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-                          <span style={{ background: bi === 0 ? C.tealDim : C.amberDim, color: bi === 0 ? C.teal : C.amber, padding: "2px 9px", borderRadius: 4, fontSize: 11, fontWeight: 700 }}>{proj.period}</span>
-                          <span>{proj.funder}</span>
+                        <div style={{ fontSize: 15, fontWeight: 800, color: C.navy, lineHeight: 1.6 }}>{proj.title}</div>
+                        <div style={{ fontSize: 13, color: C.ink2, marginTop: 6, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                          <span style={{ background: bi === 0 ? C.tealDim : C.amberDim, color: bi === 0 ? C.teal : C.amber, padding: "3px 11px", borderRadius: 5, fontSize: 12, fontWeight: 800 }}>{proj.period}</span>
+                          <span style={{ fontWeight: 500 }}>{proj.funder}</span>
                         </div>
                       </div>
                       <div style={{ width: 24, height: 24, borderRadius: 6, background: isOpen ? (bi === 0 ? C.teal : C.amber) : C.border, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
@@ -673,16 +679,16 @@ export default function Portfolio() {
                       <div style={{ padding: "0 20px 16px", borderTop: `1px solid ${C.border}` }}>
                         <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0" }}>
                           {proj.bullets.map((b, i) => (
-                            <li key={i} style={{ display: "flex", gap: 10, fontSize: 13, color: C.ink2, marginBottom: 8, lineHeight: 1.7, alignItems: "flex-start" }}>
-                              <span style={{ color: bi === 0 ? C.teal : C.amber, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>›</span>
+                            <li key={i} style={{ display: "flex", gap: 10, fontSize: 14, color: C.ink2, marginBottom: 10, lineHeight: 1.8, alignItems: "flex-start", fontWeight: 500 }}>
+                              <span style={{ color: bi === 0 ? C.teal : C.amber, fontWeight: 800, flexShrink: 0, marginTop: 1.5, fontSize: 16 }}>›</span>
                               <EditableText editMode={editMode} value={b}
                                 onChange={v => { const nr = [...research]; nr[bi].projects[pi].bullets[i] = v; setResearch([...nr]); }}
-                                style={{ fontSize: 13, color: C.ink2, flex: 1 }} />
-                              {editMode && <button onClick={() => { const nr = [...research]; nr[bi].projects[pi].bullets = nr[bi].projects[pi].bullets.filter((_: string, j: number) => j !== i); setResearch([...nr]); }} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 14, padding: 0, flexShrink: 0 }}>×</button>}
+                                style={{ fontSize: 14, color: C.ink2, flex: 1, fontWeight: 500 }} />
+                              {editMode && <button onClick={() => { const nr = [...research]; nr[bi].projects[pi].bullets = nr[bi].projects[pi].bullets.filter((_: string, j: number) => j !== i); setResearch([...nr]); }} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 16, padding: 0, flexShrink: 0, fontWeight: 700 }}>×</button>}
                             </li>
                           ))}
                         </ul>
-                        {editMode && <button onClick={() => { const nr = [...research]; nr[bi].projects[pi].bullets = [...nr[bi].projects[pi].bullets, "New bullet point"]; setResearch([...nr]); }} style={{ background: C.amberDim, border: `1px dashed ${C.amber}`, borderRadius: 6, padding: "5px 14px", fontSize: 12, color: C.amber, cursor: "pointer", fontWeight: 600, marginTop: 4 }}>+ Add Bullet</button>}
+                        {editMode && <button onClick={() => { const nr = [...research]; nr[bi].projects[pi].bullets = [...nr[bi].projects[pi].bullets, "New bullet point"]; setResearch([...nr]); }} style={{ background: C.amberDim, border: `1.5px dashed ${C.amber}40`, borderRadius: 7, padding: "6px 16px", fontSize: 13, color: C.amber, cursor: "pointer", fontWeight: 700, marginTop: 6 }}>+ Add Bullet</button>}
                       </div>
                     )}
                   </div>
@@ -712,20 +718,20 @@ export default function Portfolio() {
                   <div style={{ position: "absolute", left: -32, top: 20, width: 18, height: 18, borderRadius: "50%", background: col, border: `3px solid ${C.surface}`, zIndex: 1 }} />
                   <div style={{ ...cardStyle, position: "relative", borderLeft: `3px solid ${col}` }}>
                     {editMode && <button onClick={() => setConferences(conferences.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700, zIndex: 2 }}>×</button>}
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
-                      <span style={{ fontSize: 10.5, fontWeight: 700, color: col, background: bg, border: `1px solid ${col}25`, padding: "3px 10px", borderRadius: 4, textTransform: "uppercase", letterSpacing: "0.05em" }}>{c.type}</span>
-                      <span style={{ fontSize: 12, color: C.ink2, fontWeight: 500 }}>{c.date}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 12, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: col, background: bg, border: `1.5px solid ${col}40`, padding: "4px 12px", borderRadius: 5, textTransform: "uppercase", letterSpacing: "0.06em" }}>{c.type}</span>
+                      <span style={{ fontSize: 13, color: C.ink2, fontWeight: 600 }}>{c.date}</span>
                     </div>
                     <EditableText editMode={editMode} value={c.event} onChange={v => { const nc = [...conferences]; nc[i] = { ...nc[i], event: v }; setConferences(nc); }}
-                      tag="div" style={{ fontSize: 15, fontWeight: 700, color: C.navy, lineHeight: 1.5, marginBottom: 5, fontFamily: "'Roboto', sans-serif" }} />
-                    <div style={{ fontSize: 12.5, color: C.ink2 }}>📍 {c.location}</div>
+                      tag="div" style={{ fontSize: 16, fontWeight: 800, color: C.navy, lineHeight: 1.6, marginBottom: 7, fontFamily: "'Roboto', sans-serif" }} />
+                    <div style={{ fontSize: 13, color: C.ink2, fontWeight: 500 }}>📍 {c.location}</div>
                     {c.note && <EditableText editMode={editMode} value={c.note} onChange={v => { const nc = [...conferences]; nc[i] = { ...nc[i], note: v }; setConferences(nc); }}
-                      tag="div" style={{ fontSize: 12.5, color: C.ink2, marginTop: 10, fontStyle: "italic", borderTop: `1px solid ${C.border}`, paddingTop: 10 }} />}
+                      tag="div" style={{ fontSize: 13, color: C.ink2, marginTop: 12, fontStyle: "italic", fontWeight: 500, borderTop: `1px solid ${C.border}`, paddingTop: 12 }} />}
                   </div>
                 </div>
               );
             })}
-            {editMode && <div style={{ position: "relative" }}><div style={{ position: "absolute", left: -32, top: 18, width: 18, height: 18, borderRadius: "50%", background: C.amber, border: `3px solid ${C.surface}`, zIndex: 1, opacity: 0.4 }} /><button onClick={() => setConferences([...conferences, { type: "Oral Presentation", event: "New Conference Name", location: "Location", date: "Date", note: "" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const, width: "100%" }}>+ Add Conference</button></div>}
+            {editMode && <div style={{ position: "relative" }}><div style={{ position: "absolute", left: -32, top: 18, width: 18, height: 18, borderRadius: "50%", background: C.amber, border: `3px solid ${C.surface}`, zIndex: 1, opacity: 0.4 }} /><button onClick={() => setConferences([...conferences, { type: "Oral Presentation", event: "New Conference Name", location: "Location", date: "Date", note: "" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}60`, borderRadius: 12, padding: "20px", fontSize: 15, color: C.amber, cursor: "pointer", fontWeight: 800, textAlign: "center" as const, width: "100%", letterSpacing: "0.01em" }}>+ Add Conference</button></div>}
           </div>
         </div>
 
@@ -736,18 +742,18 @@ export default function Portfolio() {
         {experience.map((exp, i) => (
           <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden", marginBottom: 32 }}>
             {/* Header band */}
-            <div style={{ background: C.navy3, color: 'white', padding: "22px 26px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
+            <div style={{ background: C.navy3, color: 'white', padding: "24px 28px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 14 }}>
               <div>
                 <EditableText editMode={editMode} value={exp.role} onChange={v => { const ne = [...experience]; ne[i] = { ...ne[i], role: v }; setExperience(ne); }}
-                  tag="div" style={{ fontSize: 17, fontWeight: 800, color: "white", fontFamily: "'Roboto', sans-serif" }} />
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", marginTop: 4, fontWeight: 500 }}>{exp.org} · {exp.location}</div>
+                  tag="div" style={{ fontSize: 18, fontWeight: 900, color: "white", fontFamily: "'Roboto', sans-serif" }} />
+                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.8)", marginTop: 5, fontWeight: 600 }}>{exp.org} · {exp.location}</div>
               </div>
-              <span style={{ fontSize: 12, background: "rgba(13,158,114,0.14)", color: C.amber, padding: "5px 14px", borderRadius: 6, border: `1px solid ${C.amber}30`, whiteSpace: "nowrap", fontWeight: 600 }}>{exp.period}</span>
+              <span style={{ fontSize: 13, background: "rgba(13,158,114,0.16)", color: C.amber, padding: "6px 16px", borderRadius: 7, border: `1.5px solid ${C.amber}40`, whiteSpace: "nowrap", fontWeight: 800, letterSpacing: "0.01em" }}>{exp.period}</span>
             </div>
             <div className="card-inner" style={{ padding: "24px" }}>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px" }}>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px" }}>
                 {exp.bullets.map((b, j) => (
-                  <li key={j} style={{ display: "flex", gap: 10, fontSize: 14, color: C.ink2, marginBottom: 9, lineHeight: 1.7, alignItems: "flex-start" }}>
+                  <li key={j} style={{ display: "flex", gap: 12, fontSize: 15, color: C.ink2, marginBottom: 11, lineHeight: 1.8, alignItems: "flex-start", fontWeight: 500 }}>
                     <span style={{ color: C.teal, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>›</span>
                     <EditableText editMode={editMode} value={b} onChange={v => { const ne = [...experience]; ne[i].bullets[j] = v; setExperience([...ne]); }} style={{ fontSize: 14, color: C.ink2, flex: 1 }} />
                     {editMode && <button onClick={() => { const ne = [...experience]; ne[i].bullets = ne[i].bullets.filter((_: string, k: number) => k !== j); setExperience([...ne]); }} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 14, padding: 0, flexShrink: 0 }}>×</button>}
@@ -763,30 +769,68 @@ export default function Portfolio() {
             </div>
           </div>
         ))}
-        {editMode && <button onClick={() => setExperience([...experience, { role: "New Role", org: "Organization", location: "Location", period: "Period", bullets: ["Responsibility"], award: "" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const, width: "100%", marginBottom: 32 }}>+ Add Experience</button>}
+        {editMode && <button onClick={() => setExperience([...experience, { role: "New Role", org: "Organization", location: "Location", period: "Period", bullets: ["Responsibility"], award: "" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}60`, borderRadius: 12, padding: "20px", fontSize: 15, color: C.amber, cursor: "pointer", fontWeight: 800, textAlign: "center" as const, width: "100%", marginBottom: 32, letterSpacing: "0.01em" }}>+ Add Experience</button>}
 
         {/* Leadership */}
         <div style={{ marginBottom: 8 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 3, height: 24, background: `linear-gradient(180deg,${C.amber},${C.teal})`, borderRadius: 2 }} />
-            <h3 style={{ fontSize: 18, fontWeight: 800, color: C.navy, margin: 0, fontFamily: "'Roboto', sans-serif" }}>Leadership & Extracurricular</h3>
+            <h3 style={{ fontSize: 19, fontWeight: 800, color: C.navy, margin: 0, fontFamily: "'Roboto', sans-serif", letterSpacing: "0.01em" }}>Leadership & Extracurricular</h3>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 12 }}>
             {leadership.map((l, i) => (
-              <div key={i} style={{ ...cardStyle, display: "flex", gap: 14, padding: "16px 18px", position: "relative", borderTop: `2px solid ${i % 2 === 0 ? C.teal : C.amber}` }}>
-                {editMode && <button onClick={() => setLeadership(leadership.filter((_, j) => j !== i))} style={{ position: "absolute", top: 6, right: 6, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "2px 7px", fontWeight: 700 }}>×</button>}
-                <div style={{ width: 38, height: 38, borderRadius: 8, background: i % 2 === 0 ? C.tealDim : C.amberDim, border: `1px solid ${i % 2 === 0 ? C.teal : C.amber}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 17 }}>{l.icon}</div>
+              <div key={i} style={{ ...cardStyle, display: "flex", gap: 14, padding: "18px 20px", position: "relative", borderTop: `2.5px solid ${i % 2 === 0 ? C.teal : C.amber}` }}>
+                {editMode && <button onClick={() => setLeadership(leadership.filter((_, j) => j !== i))} style={{ position: "absolute", top: 6, right: 6, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 13, padding: "3px 8px", fontWeight: 800 }}>×</button>}
+                <div style={{ width: 40, height: 40, borderRadius: 8, background: i % 2 === 0 ? C.tealDim : C.amberDim, border: `1.5px solid ${i % 2 === 0 ? C.teal : C.amber}40`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 18 }}>{l.icon}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <EditableText editMode={editMode} value={l.role} onChange={v => { const nl = [...leadership]; nl[i] = { ...nl[i], role: v }; setLeadership(nl); }}
-                    tag="div" style={{ fontSize: 13, fontWeight: 700, color: C.navy, lineHeight: 1.4 }} />
+                    tag="div" style={{ fontSize: 14, fontWeight: 800, color: C.navy, lineHeight: 1.5 }} />
                   <EditableText editMode={editMode} value={l.org} onChange={v => { const nl = [...leadership]; nl[i] = { ...nl[i], org: v }; setLeadership(nl); }}
-                    tag="div" style={{ fontSize: 11.5, color: C.ink2, marginTop: 3, lineHeight: 1.35 }} />
-                  <div style={{ fontSize: 11, color: i % 2 === 0 ? C.teal : C.amber, marginTop: 5, fontWeight: 700 }}>{l.period}</div>
+                    tag="div" style={{ fontSize: 12.5, color: C.ink2, marginTop: 3, lineHeight: 1.4, fontWeight: 500 }} />
+                  <div style={{ fontSize: 12, color: i % 2 === 0 ? C.teal : C.amber, marginTop: 6, fontWeight: 800 }}>{l.period}</div>
                 </div>
               </div>
             ))}
-            {editMode && <button onClick={() => setLeadership([...leadership, { role: "New Role", org: "Organization", period: "Period", icon: "⭐" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "18px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Leadership</button>}
+            {editMode && <button onClick={() => setLeadership([...leadership, { role: "New Role", org: "Organization", period: "Period", icon: "⭐" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}60`, borderRadius: 12, padding: "20px", fontSize: 15, color: C.amber, cursor: "pointer", fontWeight: 800, textAlign: "center" as const, letterSpacing: "0.01em" }}>+ Add Leadership</button>}
           </div>
+        </div>
+
+        <Hr />
+
+        {/* ─── WORKSHOPS & SEMINARS ─── */}
+        <SecHead id="workshops">Workshops & Seminars</SecHead>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 32 }}>
+          {workshops.map((w, i) => (
+            <div key={i} style={{ ...cardStyle, borderLeft: `4px solid ${C.teal}`, position: "relative" }}>
+              {editMode && <button onClick={() => setWorkshops(workshops.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 13, padding: "3px 8px", fontWeight: 800 }}>×</button>}
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 12, flexWrap: "wrap" }}>
+                <div style={{ flex: 1 }}>
+                  <EditableText editMode={editMode} value={w.title} onChange={v => { const nw = [...workshops]; nw[i].title = v; setWorkshops(nw); }}
+                    tag="div" style={{ fontSize: 16, fontWeight: 800, color: C.navy, marginBottom: 6, lineHeight: 1.6 }} />
+                  <EditableText editMode={editMode} value={w.description} onChange={v => { const nw = [...workshops]; nw[i].description = v; setWorkshops(nw); }} multiline
+                    tag="div" style={{ fontSize: 14, color: C.ink2, marginBottom: 10, lineHeight: 1.8, fontWeight: 500 }} />
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", fontSize: 13, color: C.ink2 }}>
+                <div style={{ display: "flex", gap: 6, alignItems: "center", fontWeight: 600 }}>
+                  <span style={{ fontSize: 16 }}>🏛</span>
+                  <EditableText editMode={editMode} value={w.organizer} onChange={v => { const nw = [...workshops]; nw[i].organizer = v; setWorkshops(nw); }}
+                    style={{ fontWeight: 700, color: C.teal }} />
+                </div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center", fontWeight: 600 }}>
+                  <span style={{ fontSize: 16 }}>📅</span>
+                  <EditableText editMode={editMode} value={w.date} onChange={v => { const nw = [...workshops]; nw[i].date = v; setWorkshops(nw); }}
+                    style={{ fontWeight: 700 }} />
+                </div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center", fontWeight: 600, background: C.tealDim, color: C.teal, padding: "3px 10px", borderRadius: 5 }}>
+                  <span style={{ fontSize: 14 }}>💻</span>
+                  <EditableText editMode={editMode} value={w.mode} onChange={v => { const nw = [...workshops]; nw[i].mode = v; setWorkshops(nw); }}
+                    style={{ fontWeight: 700, color: C.teal }} />
+                </div>
+              </div>
+            </div>
+          ))}
+          {editMode && <button onClick={() => setWorkshops([...workshops, { title: "Workshop Title", description: "Workshop description", organizer: "Organizer", date: "Date", mode: "Mode" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}60`, borderRadius: 12, padding: "20px", fontSize: 15, color: C.teal, cursor: "pointer", fontWeight: 800, textAlign: "center" as const, letterSpacing: "0.01em" }}>+ Add Workshop</button>}
         </div>
 
         <Hr />
@@ -795,7 +839,7 @@ export default function Portfolio() {
         <SecHead id="skills">Skills & Training</SecHead>
         <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 16 }}>
           <div style={{ ...cardStyle, borderTop: `3px solid ${C.navy}` }}>
-            <div style={{ fontSize: 10, color: C.navy, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16, fontWeight: 700 }}>Statistical Software</div>
+            <div style={{ fontSize: 11, color: C.navy, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 18, fontWeight: 800 }}>Statistical Software</div>
             {skills.map((s, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 11 }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: i % 2 === 0 ? C.teal : C.amber, flexShrink: 0 }} />
@@ -824,21 +868,21 @@ export default function Portfolio() {
 
         {/* Trainings */}
         <div style={{ ...cardStyle, borderTop: `3px solid ${C.teal}` }}>
-          <div style={{ fontSize: 10, color: C.teal, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 18, fontWeight: 700 }}>Training & Development</div>
+          <div style={{ fontSize: 11, color: C.teal, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 20, fontWeight: 800 }}>Training & Development</div>
           {trainings.map((t, i) => (
-            <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "13px 0", borderBottom: i < trainings.length - 1 ? `1px solid ${C.border}` : "none", gap: 14, flexWrap: "wrap" }}>
+            <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "15px 0", borderBottom: i < trainings.length - 1 ? `1px solid ${C.border}` : "none", gap: 14, flexWrap: "wrap" }}>
               <div style={{ display: "flex", gap: 13, alignItems: "center", flex: 1 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 7, background: i % 2 === 0 ? C.tealDim : C.amberDim, border: `1px solid ${i % 2 === 0 ? C.teal : C.amber}30`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>📚</div>
+                <div style={{ width: 36, height: 36, borderRadius: 8, background: i % 2 === 0 ? C.tealDim : C.amberDim, border: `1.5px solid ${i % 2 === 0 ? C.teal : C.amber}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0 }}>📚</div>
                 <EditableText editMode={editMode} value={t.title} onChange={v => { const nt = [...trainings]; nt[i] = { ...nt[i], title: v }; setTrainings(nt); }}
-                  style={{ fontSize: 13, color: C.ink2 }} />
+                  style={{ fontSize: 14, color: C.ink2, fontWeight: 600 }} />
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-                <span style={{ fontSize: 12, color: C.ink2, whiteSpace: "nowrap", fontWeight: 500, background: C.borderLight, padding: "3px 10px", borderRadius: 4 }}>{t.period}</span>
-                {editMode && <button onClick={() => setTrainings(trainings.filter((_, j) => j !== i))} style={{ background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "2px 7px", fontWeight: 700 }}>×</button>}
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 13, color: C.ink2, whiteSpace: "nowrap", fontWeight: 700, background: C.borderLight, padding: "4px 12px", borderRadius: 5 }}>{t.period}</span>
+                {editMode && <button onClick={() => setTrainings(trainings.filter((_, j) => j !== i))} style={{ background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 13, padding: "3px 8px", fontWeight: 800 }}>×</button>}
               </div>
             </div>
           ))}
-          {editMode && <button onClick={() => setTrainings([...trainings, { title: "New Training", period: "Period" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}40`, borderRadius: 8, padding: "12px", fontSize: 13, color: C.teal, cursor: "pointer", fontWeight: 700, textAlign: "center" as const, width: "100%", marginTop: 14 }}>+ Add Training</button>}
+          {editMode && <button onClick={() => setTrainings([...trainings, { title: "New Training", period: "Period" }])} style={{ background: C.tealDim, border: `2px dashed ${C.teal}60`, borderRadius: 8, padding: "14px", fontSize: 14, color: C.teal, cursor: "pointer", fontWeight: 800, textAlign: "center" as const, width: "100%", marginTop: 16, letterSpacing: "0.01em" }}>+ Add Training</button>}
         </div>
 
         <div id="contact" style={{
@@ -851,9 +895,9 @@ export default function Portfolio() {
           <div style={{ position: "absolute", bottom: -100, right: -100, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle,${C.amber}15,transparent 70%)` }} />
 
           <div style={{ position: "relative", zIndex: 1, maxWidth: 650, margin: "0 auto", textAlign: "left" }}>
-            <div style={{ textAlign: "center", marginBottom: 40 }}>
-              <h2 style={{ fontSize: "clamp(1.75rem,5vw,2.5rem)", fontWeight: 900, color: C.navy, marginBottom: 16, letterSpacing: "-0.01em" }}>Get In Touch</h2>
-              <p style={{ fontSize: 16, color: C.ink2, opacity: 0.9, lineHeight: 1.6 }}>
+            <div style={{ textAlign: "center", marginBottom: 44 }}>
+              <h2 style={{ fontSize: "clamp(1.9rem,5vw,2.7rem)", fontWeight: 900, color: C.navy, marginBottom: 18, letterSpacing: "-0.02em" }}>Get In Touch</h2>
+              <p style={{ fontSize: 17, color: C.ink2, opacity: 0.85, lineHeight: 1.7, fontWeight: 500 }}>
                 Have a question or want to collaborate? Send me a message below.
               </p>
             </div>
@@ -862,44 +906,44 @@ export default function Portfolio() {
               e.preventDefault();
               const mailtoUrl = `mailto:${person.email}?subject=${encodeURIComponent(formData.subject || "Contact from Portfolio")}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
               window.location.href = mailtoUrl;
-            }} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            }} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
               <div style={{ gridColumn: "span 1" }}>
-                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Name</label>
+                <label style={{ display: "block", color: C.navy, fontSize: 14, fontWeight: 700, marginBottom: 10, letterSpacing: "0.01em" }}>Name</label>
                 <input type="text" required placeholder="Your Name" value={formData.name} name="name" onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+                  style={{ width: "100%", background: "white", border: `1.5px solid ${C.border}`, borderRadius: 9, padding: "13px 16px", color: C.ink, fontSize: 14, fontWeight: 500, outline: "none", boxShadow: "0 2px 6px rgba(0,0,0,0.03)", transition: "all 0.2s" }} />
               </div>
               <div style={{ gridColumn: "span 1" }}>
-                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Email</label>
+                <label style={{ display: "block", color: C.navy, fontSize: 14, fontWeight: 700, marginBottom: 10, letterSpacing: "0.01em" }}>Email</label>
                 <input type="email" required placeholder="Your Email" value={formData.email} name="email" onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+                  style={{ width: "100%", background: "white", border: `1.5px solid ${C.border}`, borderRadius: 9, padding: "13px 16px", color: C.ink, fontSize: 14, fontWeight: 500, outline: "none", boxShadow: "0 2px 6px rgba(0,0,0,0.03)", transition: "all 0.2s" }} />
               </div>
               <div style={{ gridColumn: "span 2" }}>
-                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Subject</label>
+                <label style={{ display: "block", color: C.navy, fontSize: 14, fontWeight: 700, marginBottom: 10, letterSpacing: "0.01em" }}>Subject</label>
                 <input type="text" placeholder="Subject" value={formData.subject} name="subject" onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+                  style={{ width: "100%", background: "white", border: `1.5px solid ${C.border}`, borderRadius: 9, padding: "13px 16px", color: C.ink, fontSize: 14, fontWeight: 500, outline: "none", boxShadow: "0 2px 6px rgba(0,0,0,0.03)", transition: "all 0.2s" }} />
               </div>
               <div style={{ gridColumn: "span 2" }}>
-                <label style={{ display: "block", color: C.navy, fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Message</label>
+                <label style={{ display: "block", color: C.navy, fontSize: 14, fontWeight: 700, marginBottom: 10, letterSpacing: "0.01em" }}>Message</label>
                 <textarea required placeholder="Your Message" rows={5} value={formData.message} name="message" onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  style={{ width: "100%", background: "white", border: `1px solid ${C.border}`, borderRadius: 8, padding: "12px 16px", color: C.ink, fontSize: 14, outline: "none", resize: "vertical", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }} />
+                  style={{ width: "100%", background: "white", border: `1.5px solid ${C.border}`, borderRadius: 9, padding: "13px 16px", color: C.ink, fontSize: 14, fontWeight: 500, outline: "none", resize: "vertical", boxShadow: "0 2px 6px rgba(0,0,0,0.03)", transition: "all 0.2s", fontFamily: "'Roboto', sans-serif" }} />
               </div>
-              <div style={{ gridColumn: "span 2", textAlign: "center", marginTop: 10 }}>
+              <div style={{ gridColumn: "span 2", textAlign: "center", marginTop: 14 }}>
                 <button type="submit" style={{
-                  background: C.navy, color: "white", padding: "16px 48px", borderRadius: 12,
-                  fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer",
-                  boxShadow: `0 10px 20px -5px ${C.navy}40`,
-                  transition: "all 0.3s"
+                  background: C.navy, color: "white", padding: "18px 56px", borderRadius: 10,
+                  fontSize: 16, fontWeight: 800, border: "none", cursor: "pointer", letterSpacing: "0.02em",
+                  boxShadow: `0 12px 28px -8px ${C.navy}50`,
+                  transition: "all 0.3s", textTransform: "uppercase"
                 }}>
                   Send Message 🚀
                 </button>
               </div>
             </form>
           </div>
-        </div>
+       </div>
       </main>
 
       {/* ═══ FOOTER ═══ */}
-      <footer style={{ textAlign: "center", padding: "2rem 2.5rem", borderTop: `1px solid ${C.border}`, color: C.muted, fontSize: 12.5, background: C.surfaceCard, letterSpacing: "0.02em" }}>
+      <footer style={{ textAlign: "center", padding: "3rem 2.5rem", borderTop: `1px solid ${C.border}`, color: C.muted, fontSize: 13, fontWeight: 600, background: C.surfaceCard, letterSpacing: "0.03em" }}>
         © {new Date().getFullYear()} {person.name} · {person.title} · {person.location}
       </footer>
     </div>
