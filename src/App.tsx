@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import type { CSSProperties, ReactNode, KeyboardEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { portfolioAPI } from "./api";
 
 /* ─── types ─── */
@@ -208,7 +208,6 @@ function SaveToast({ show }: { show: boolean }) {
 /* ═══════════════════════════════════════════ */
 export default function Portfolio() {
   const location = useLocation();
-  const navigate = useNavigate();
   const editMode = location.pathname === "/edit";
 
   const [active, setActive] = useState("about");

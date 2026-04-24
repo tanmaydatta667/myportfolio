@@ -15,7 +15,7 @@ export const portfolioAPI = {
   },
 
   // Save entire portfolio
-  async savePortfolio(data) {
+  async savePortfolio(data: any) {
     try {
       const res = await fetch(`${API_URL}/portfolio`, {
         method: 'PUT',
@@ -31,7 +31,7 @@ export const portfolioAPI = {
   },
 
   // Update specific field
-  async updateField(field, value) {
+  async updateField(field: string, value: any) {
     try {
       const res = await fetch(`${API_URL}/portfolio/${field}`, {
         method: 'PATCH',
