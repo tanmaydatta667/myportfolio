@@ -1,5 +1,5 @@
 // API configuration
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-server-2-ke5r.onrender.com/api';
 
 export const portfolioAPI = {
   // Fetch all portfolio data
