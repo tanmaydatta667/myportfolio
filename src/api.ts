@@ -1,5 +1,5 @@
 // API configuration
-const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-server-2-ke5r.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const portfolioAPI = {
   // Fetch all portfolio data
@@ -22,10 +22,14 @@ export const portfolioAPI = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (!res.ok) throw new Error('Failed to save portfolio');
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errorText}`);
+      }
       return await res.json();
     } catch (error) {
       console.error('Error saving portfolio:', error);
+      console.error('API URL:', API_URL);
       return null;
     }
   },

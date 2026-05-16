@@ -36,7 +36,7 @@ const NAV = ["About", "Education", "Publications", "Research", "Conferences", "E
 /* ─── DEFAULT DATA ─── */
 const DEFAULT_DATA = {
   person: {
-    name: "Tanmay Datta", title: "Agricultural Economist",
+    name: "", title: "Agricultural Economist",
     institution: "Sher-e-Bangla Agricultural University", location: " Bangladesh",
     email: "tanmaydatta67@gmail.com", phone: "(+880) 1758279651",
     about: `I am a graduate in Agricultural Economics from Sher-e-Bangla Agricultural University, Bangladesh, with a strong research focus on food and nutrition security, climate-smart agriculture, and development economics. I possess practical experience in both field-based and quantitative research, including primary data collection, data management, and advanced statistical and machine learning analysis using R, SPSS, and Stata.
@@ -274,7 +274,7 @@ export default function Portfolio() {
         setSaveToast(true);
         setTimeout(() => setSaveToast(false), 2500);
       } else {
-        alert("Save failed. Please check if the backend server is running.");
+        alert("Save failed. Check console (F12) for error details. Make sure backend is running at: " + (import.meta.env.VITE_API_URL || 'http://localhost:5000/api'));
       }
     });
   }, [person, publications, underReview, workingPapers, research, conferences, experience, leadership, skills, competencies, trainings, workshops, education, tests, cvUrl, footer]);
