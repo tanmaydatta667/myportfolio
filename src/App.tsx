@@ -669,7 +669,7 @@ export default function Portfolio() {
         </div>
 
         {/* ─── EDUCATION ─── */}
-        <SecHead id="education">Education</SecHead>
+        {(editMode || education.length > 0) && <SecHead id="education">Education</SecHead>}
         <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 30 }}>
           {education.map((edu, i) => (
             <div key={i} className="portfolio-card" style={{ ...cardStyle, borderLeft: `4px solid ${i === 0 ? C.navy : i === 1 ? C.teal : C.amber}`, position: "relative" }}>
@@ -688,7 +688,7 @@ export default function Portfolio() {
         </div>
 
         {/* Standardized Tests */}
-        <div style={{ marginBottom: 34 }}>
+        {(editMode || tests.length > 0) && <div style={{ marginBottom: 34 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 3, height: 24, background: `linear-gradient(180deg,${C.amber},${C.teal})`, borderRadius: 2 }} />
             <h3 style={{ fontSize: 19, fontWeight: 800, color: C.navy, margin: 0 }}>Standardized Tests</h3>
@@ -710,10 +710,10 @@ export default function Portfolio() {
               <button onClick={() => setTests([...tests, { name: "Test Name", score: "" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}40`, borderRadius: 12, padding: "16px", fontSize: 14, color: C.amber, cursor: "pointer", fontWeight: 700, textAlign: "center" as const }}>+ Add Test</button>
             )}
           </div>
-        </div>
+        </div>}
 
         {/* ─── PUBLICATIONS ─── */}
-        <SecHead id="publications">Publications</SecHead>
+        {(editMode || publications.length > 0 || underReview.length > 0 || workingPapers.length > 0) && <SecHead id="publications">Publications</SecHead>}
         <div style={{ marginBottom: 26 }}>
           <div className="publication-tabs" style={{ display: "flex", gap: 4, marginBottom: 28, background: C.borderLight, padding: 6, borderRadius: 11, width: "fit-content" }}>
             {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "In Progress", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
@@ -800,7 +800,7 @@ export default function Portfolio() {
         </div>
 
         {/* ─── RESEARCH ─── */}
-        <SecHead id="research">Research Experience</SecHead>
+        {(editMode || research.length > 0) && <SecHead id="research">Research Experience</SecHead>}
         {research.map((block, bi) => (
           <div key={bi} style={{ marginBottom: 34 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 18, paddingBottom: 16, borderBottom: `1px solid ${C.border}` }}>
@@ -877,7 +877,7 @@ export default function Portfolio() {
 
 
         {/* ─── CONFERENCES ─── */}
-        <SecHead id="conferences">Conferences</SecHead>
+        {(editMode || conferences.length > 0) && <SecHead id="conferences">Conferences</SecHead>}
         <div style={{ position: "relative", paddingLeft: 32, marginBottom: 20 }}>
           <div style={{ position: "absolute", left: 9, top: 10, bottom: 10, width: 2, background: `linear-gradient(180deg,${C.amber},${C.teal}30)`, borderRadius: 2 }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -925,7 +925,7 @@ export default function Portfolio() {
         </div>
 
         {/* ─── EXPERIENCE ─── */}
-        <SecHead id="experience">Professional Experience</SecHead>
+        {(editMode || experience.length > 0) && <SecHead id="experience">Professional Experience</SecHead>}
         {experience.map((exp, i) => (
           <div key={i} className="portfolio-card" style={{ ...cardStyle, padding: 0, overflow: "hidden", marginBottom: 32 }}>
             <div style={{ background: C.navy3, color: "white", padding: "24px 28px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 14 }}>
@@ -966,7 +966,7 @@ export default function Portfolio() {
         {editMode && <AddBtn onClick={() => setExperience([...experience, { role: "New Role", org: "Organization", location: "Location", period: "Start – End", bullets: ["Key responsibility"], award: "" }])} label="+ Add Experience" color={C.amber} bg={C.amberDim} />}
 
         {/* Leadership */}
-        <div style={{ marginBottom: 8, marginTop: 32 }}>
+        {(editMode || leadership.length > 0) && <div style={{ marginBottom: 8, marginTop: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 3, height: 24, background: `linear-gradient(180deg,${C.amber},${C.teal})`, borderRadius: 2 }} />
             <h3 style={{ fontSize: 19, fontWeight: 800, color: C.navy, margin: 0, letterSpacing: "0.01em" }}>Leadership & Extracurricular</h3>
@@ -992,12 +992,12 @@ export default function Portfolio() {
             ))}
             {editMode && <button onClick={() => setLeadership([...leadership, { role: "New Role", org: "Organization", period: "Period", icon: "⭐" }])} style={{ background: C.amberDim, border: `2px dashed ${C.amber}60`, borderRadius: 12, padding: "20px", fontSize: 15, color: C.amber, cursor: "pointer", fontWeight: 800, textAlign: "center" as const }}>+ Add Leadership</button>}
           </div>
-        </div>
+        </div>}
 
         <Hr />
 
         {/* ─── WORKSHOPS ─── */}
-        <SecHead id="workshops">Workshops & Seminars</SecHead>
+        {(editMode || workshops.length > 0) && <SecHead id="workshops">Workshops & Seminars</SecHead>}
         <div style={{ display: "flex", flexDirection: "column", gap: 18, marginBottom: 32 }}>
           {workshops.map((w, i) => (
             <div key={i} className="portfolio-card" style={{ ...cardStyle, borderLeft: `4px solid ${C.teal}`, position: "relative" }}>
@@ -1028,7 +1028,7 @@ export default function Portfolio() {
         <Hr />
 
         {/* ─── SKILLS ─── */}
-        <SecHead id="skills">Skills & Training</SecHead>
+        {(editMode || skills.length > 0 || competencies.length > 0) && <SecHead id="skills">Skills & Training</SecHead>}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 16, marginBottom: 16 }}>
           <div className="portfolio-card" style={{ ...cardStyle, borderTop: `3px solid ${C.navy}` }}>
             <div style={{ fontSize: 11, color: C.navy, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 18, fontWeight: 800 }}>Statistical Software</div>
