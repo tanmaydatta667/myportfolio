@@ -37,7 +37,7 @@ const NAV = ["About", "Education", "Publications", "Research", "Conferences", "E
 const DEFAULT_DATA = {
   person: {
     name: "Tanmay Datta", title: "Agricultural Economist",
-    institution: "Sher-e-Bangla Agricultural University", location: "Dhaka-1207, Bangladesh",
+    institution: "Sher-e-Bangla Agricultural University", location: " Bangladesh",
     email: "tanmaydatta67@gmail.com", phone: "(+880) 1758279651",
     about: `I am a graduate in Agricultural Economics from Sher-e-Bangla Agricultural University, Bangladesh, with a strong research focus on food and nutrition security, climate-smart agriculture, and development economics. I possess practical experience in both field-based and quantitative research, including primary data collection, data management, and advanced statistical and machine learning analysis using R, SPSS, and Stata.
 I have contributed to peer-reviewed publications and ongoing research projects addressing agricultural productivity, climate adaptation, and socio-economic development. I am committed to producing rigorous, data-driven research that informs policy and supports sustainable and inclusive development.`,
@@ -133,6 +133,7 @@ I have contributed to peer-reviewed publications and ongoing research projects a
     { name: "IELTS", score: "" },
   ] as TestItem[],
   cvUrl: "",
+  footer: "© {year} {name} · {title} · {location}",
 };
 
 function loadData() { return DEFAULT_DATA; }
@@ -232,6 +233,7 @@ export default function Portfolio() {
   const [workshops, setWorkshops] = useState<Workshop[]>(initial.workshops);
   const [education, setEducation] = useState<EducationItem[]>(initial.education);
   const [tests, setTests] = useState<TestItem[]>(initial.tests);
+  const [footer, setFooter] = useState<string>(initial.footer || "© {year} {name} · {title} · {location}");
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [openProj, setOpenProj] = useState<Record<string, boolean>>({});
   const [pubTab, setPubTab] = useState("published");
@@ -264,7 +266,7 @@ export default function Portfolio() {
     const data = {
       person, publications, underReview, workingPapers,
       research, conferences, experience, leadership,
-      skills, competencies, trainings, workshops, education, tests,cvUrl,
+      skills, competencies, trainings, workshops, education, tests, cvUrl, footer,
     };
     portfolioAPI.savePortfolio(data).then(result => {
       if (result) {
@@ -275,7 +277,7 @@ export default function Portfolio() {
         alert("Save failed. Please check if the backend server is running.");
       }
     });
-  }, [person, publications, underReview, workingPapers, research, conferences, experience, leadership, skills, competencies, trainings, workshops, education, tests, cvUrl]);
+  }, [person, publications, underReview, workingPapers, research, conferences, experience, leadership, skills, competencies, trainings, workshops, education, tests, cvUrl, footer]);
 
   /* ─── Reset to defaults ─── */
   const resetAll = () => {
@@ -297,19 +299,20 @@ export default function Portfolio() {
       setEducation(resetData.education);
       setTests(resetData.tests);
       setCvUrl(resetData.cvUrl);
+      setFooter(resetData.footer);
     });
     const d = DEFAULT_DATA;
     setPerson(d.person); setPublications(d.publications); setUnderReview(d.underReview);
     setWorkingPapers(d.workingPapers); setResearch(d.research); setConferences(d.conferences);
     setExperience(d.experience); setLeadership(d.leadership); setSkills(d.skills);
     setCompetencies(d.competencies); setTrainings(d.trainings); setWorkshops(d.workshops);
-    setEducation(d.education); setTests(d.tests);
+    setEducation(d.education); setTests(d.tests); setFooter(d.footer);
     setSaveToast(true); setTimeout(() => setSaveToast(false), 2500);
   };
 
   useEffect(() => {
     if (editMode) setHasUnsaved(true);
-  }, [person, publications, underReview, workingPapers, research, conferences, experience, leadership, skills, competencies, trainings, workshops, education, tests]);
+  }, [person, publications, underReview, workingPapers, research, conferences, experience, leadership, skills, competencies, trainings, workshops, education, tests, footer]);
 
   useEffect(() => {
     const loadFromAPI = async () => {
@@ -384,9 +387,9 @@ export default function Portfolio() {
       }}
     >
       <svg width={size === "lg" ? 16 : 14} height={size === "lg" ? 16 : 14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
       </svg>
       {cvUrl ? (size === "lg" ? "Download CV" : "CV") : (size === "lg" ? "Download CV" : "CV")}
     </button>
@@ -471,8 +474,8 @@ export default function Portfolio() {
           cursor: "pointer", transition: "all 0.2s",
         }}>
           {menuOpen
-            ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>}
+            ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>}
         </button>
 
         <div id="header-nav" style={{ display: "flex", gap: 2, alignItems: "center", flexWrap: "nowrap", justifyContent: "flex-end" }}>
@@ -583,9 +586,9 @@ export default function Portfolio() {
                   borderRadius: 9, padding: "8px 16px",
                 }}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={C.amberBold} strokeWidth="2.5">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="17 8 12 3 7 8"/>
-                    <line x1="12" y1="3" x2="12" y2="15"/>
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
                   </svg>
                   <label style={{ cursor: cvUploading ? "wait" : "pointer", display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 13, color: C.navy, fontWeight: 800 }}>
@@ -638,7 +641,7 @@ export default function Portfolio() {
             [String(underReview.length), "Under Review", C.terra, C.terraDim],
             [String(workingPapers.length), "In Progress", C.amber, C.amberDim],
             [String(conferences.length), "Conferences", C.navy, "rgba(13,27,42,0.07)"],
-          ] as [string,string,string,string][]).map(([n, l, col, bg]) => (
+          ] as [string, string, string, string][]).map(([n, l, col, bg]) => (
             <div key={l} style={{ background: bg, border: `1.5px solid ${col}35`, borderRadius: 14, textAlign: "center", padding: "24px 16px" }}>
               <div style={{ fontSize: 38, fontWeight: 900, color: col, lineHeight: 1 }}>{n}</div>
               <div style={{ fontSize: 11, color: C.muted, marginTop: 10, letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1.3, fontWeight: 700 }}>{l}</div>
@@ -656,7 +659,7 @@ export default function Portfolio() {
               <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 {editMode
                   ? <input value={t} onChange={e => { const ni = [...person.interests]; ni[i] = e.target.value; updatePerson("interests", ni); }}
-                      style={{ background: C.tealDim, border: `1.5px solid ${C.teal}60`, borderRadius: 6, padding: "6px 14px", fontSize: 13, fontWeight: 700, color: C.teal, outline: "none", width: Math.max(100, t.length * 8) }} />
+                    style={{ background: C.tealDim, border: `1.5px solid ${C.teal}60`, borderRadius: 6, padding: "6px 14px", fontSize: 13, fontWeight: 700, color: C.teal, outline: "none", width: Math.max(100, t.length * 8) }} />
                   : <Tag>{t}</Tag>}
                 {editMode && <button onClick={() => updatePerson("interests", person.interests.filter((_: string, j: number) => j !== i))} style={{ background: "none", border: "none", color: C.terra, cursor: "pointer", fontSize: 16, padding: 0, lineHeight: 1, fontWeight: 700 }}>×</button>}
               </span>
@@ -713,7 +716,7 @@ export default function Portfolio() {
         <SecHead id="publications">Publications</SecHead>
         <div style={{ marginBottom: 26 }}>
           <div className="publication-tabs" style={{ display: "flex", gap: 4, marginBottom: 28, background: C.borderLight, padding: 6, borderRadius: 11, width: "fit-content" }}>
-            {([["published","Published",String(publications.length),C.teal],["review","Under Review",String(underReview.length),C.terra],["working","Working Papers",String(workingPapers.length),C.amber]] as [string,string,string,string][]).map(([k,v,count,col]) => (
+            {([["published", "Published", String(publications.length), C.teal], ["review", "Under Review", String(underReview.length), C.terra], ["working", "In Progress", String(workingPapers.length), C.amber]] as [string, string, string, string][]).map(([k, v, count, col]) => (
               <button key={k} onClick={() => setPubTab(k)} style={{
                 flex: 1, padding: "10px 20px", borderRadius: 8, fontSize: 14, border: "none", cursor: "pointer",
                 background: pubTab === k ? "white" : "transparent",
@@ -781,12 +784,12 @@ export default function Portfolio() {
                   {editMode && <button onClick={() => setWorkingPapers(workingPapers.filter((_, j) => j !== i))} style={{ position: "absolute", top: 8, right: 8, background: C.terraDim, border: `1px solid ${C.terra}40`, borderRadius: 6, color: C.terra, cursor: "pointer", fontSize: 12, padding: "3px 8px", fontWeight: 700 }}>×</button>}
                   {editMode
                     ? <select value={p.role} onChange={e => { const nw = [...workingPapers]; nw[i].role = e.target.value; setWorkingPapers(nw); }} style={{ background: p.role === "First Author" ? C.tealDim : C.amberDim, color: p.role === "First Author" ? C.teal : C.amber, border: `1px solid ${p.role === "First Author" ? C.teal : C.amber}40`, borderRadius: 6, padding: "4px 8px", fontSize: 11, fontWeight: 700, cursor: "pointer", flexShrink: 0 }}>
-                        <option value="First Author">First Author</option>
-                        <option value="Co-Author">Co-Author</option>
-                      </select>
+                      <option value="First Author">First Author</option>
+                      <option value="Co-Author">Co-Author</option>
+                    </select>
                     : <span style={{ fontSize: 11, fontWeight: 700, background: p.role === "First Author" ? C.tealDim : C.amberDim, color: p.role === "First Author" ? C.teal : C.amber, padding: "4px 10px", borderRadius: 4, flexShrink: 0, marginTop: 2, whiteSpace: "nowrap", border: `1px solid ${p.role === "First Author" ? C.teal : C.amber}25` }}>
-                        {p.role === "First Author" ? "1st Author" : "Co-Author"}
-                      </span>}
+                      {p.role === "First Author" ? "1st Author" : "Co-Author"}
+                    </span>}
                   <EditableText editMode={editMode} value={p.title} onChange={v => { const nw = [...workingPapers]; nw[i].title = v; setWorkingPapers(nw); }}
                     tag="div" style={{ fontSize: 14, fontWeight: 400, color: C.ink2, lineHeight: 1.65, paddingRight: editMode ? 60 : 0 }} />
                 </div>
@@ -871,7 +874,7 @@ export default function Portfolio() {
           <AddBtn onClick={() => setResearch([...research, { role: "New Research Role", color: C.teal, dept: "Department, University", projects: [{ period: "Period", title: "Project Title", funder: "Funder", bullets: ["Key contribution"] }] }])} label="+ Add Research Block" color={C.teal} bg={C.tealDim} />
         )}
 
-  
+
 
         {/* ─── CONFERENCES ─── */}
         <SecHead id="conferences">Conferences</SecHead>
@@ -893,10 +896,10 @@ export default function Portfolio() {
                     <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 12, flexWrap: "wrap" }}>
                       {editMode
                         ? <select value={c.type} onChange={e => { const nc = [...conferences]; nc[i].type = e.target.value; setConferences(nc); }} style={{ background: bg, color: col, border: `1.5px solid ${col}40`, borderRadius: 5, padding: "4px 10px", fontSize: 11, fontWeight: 800, cursor: "pointer" }}>
-                            <option>Oral Presentation</option>
-                            <option>Poster Presentation</option>
-                            <option>Abstract Accepted</option>
-                          </select>
+                          <option>Oral Presentation</option>
+                          <option>Poster Presentation</option>
+                          <option>Abstract Accepted</option>
+                        </select>
                         : <span style={{ fontSize: 11, fontWeight: 800, color: col, background: bg, border: `1.5px solid ${col}40`, padding: "4px 12px", borderRadius: 5, textTransform: "uppercase", letterSpacing: "0.06em" }}>{c.type}</span>}
                       <EditableText editMode={editMode} value={c.date} onChange={v => { const nc = [...conferences]; nc[i].date = v; setConferences(nc); }}
                         tag="span" style={{ fontSize: 13, color: C.ink2, fontWeight: 600 }} />
@@ -1083,7 +1086,7 @@ export default function Portfolio() {
               <p style={{ fontSize: 17, color: C.ink2, opacity: 0.85, lineHeight: 1.7, fontWeight: 500 }}>Have a question or want to collaborate? Send me a message below.</p>
             </div>
             <form id="contact-form" onSubmit={e => { e.preventDefault(); const url = `mailto:${person.email}?subject=${encodeURIComponent(formData.subject || "Contact from Portfolio")}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`; window.location.href = url; }} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
-              {[["Name","name","text","Your Name","span 1"],["Email","email","email","Your Email","span 1"],["Subject","subject","text","Subject","span 2"]].map(([label, field, type, placeholder, col]) => (
+              {[["Name", "name", "text", "Your Name", "span 1"], ["Email", "email", "email", "Your Email", "span 1"], ["Subject", "subject", "text", "Subject", "span 2"]].map(([label, field, type, placeholder, col]) => (
                 <div key={field} style={{ gridColumn: col }}>
                   <label style={{ display: "block", color: C.navy, fontSize: 14, fontWeight: 700, marginBottom: 10 }}>{label}</label>
                   <input type={type} placeholder={placeholder} value={(formData as any)[field]} onChange={e => setFormData({ ...formData, [field]: e.target.value })}
@@ -1106,7 +1109,13 @@ export default function Portfolio() {
       </main>
 
       <footer style={{ textAlign: "center", padding: "3rem 2.5rem", borderTop: `1px solid ${C.border}`, color: C.muted, fontSize: 13, fontWeight: 600, background: C.surfaceCard, letterSpacing: "0.03em" }}>
-        © {new Date().getFullYear()} {person.name} · {person.title} · {person.location}
+        <EditableText
+          value={footer}
+          onChange={setFooter}
+          tag="div"
+          editMode={editMode}
+          placeholder="© {year} {name} · {title} · {location}"
+        />
         {editMode && <span style={{ marginLeft: 16, fontSize: 12, color: C.amber, fontWeight: 700 }}>✏️ Edit Mode On — Remember to 💾 Save!</span>}
       </footer>
     </div>
